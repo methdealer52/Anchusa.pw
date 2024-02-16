@@ -41,7 +41,7 @@ public class HUD extends Module {
     private final Setting<Boolean> lag = register(new Setting("LagNotifier", Boolean.valueOf(false), "The time"));
     private final Timer timer = new Timer();
     private final Map<String, Integer> players = new HashMap<>();
-    public Setting<String> command = register(new Setting("Command", "OyVey"));
+
     public Setting<TextUtil.Color> bracketColor = register(new Setting("BracketColor", TextUtil.Color.BLUE));
     public Setting<TextUtil.Color> commandColor = register(new Setting("NameColor", TextUtil.Color.BLUE));
     public Setting<String> commandBracket = register(new Setting("Bracket", "<"));
@@ -90,7 +90,7 @@ public class HUD extends Module {
         int height = this.renderer.scaledHeight;
         this.color = ColorUtil.toRGBA((ClickGui.getInstance()).red.getValue().intValue(), (ClickGui.getInstance()).green.getValue().intValue(), (ClickGui.getInstance()).blue.getValue().intValue());
         if (this.waterMark.getValue().booleanValue()) {
-            String string = this.command.getPlannedValue() + " 1.0-beta";
+            String string = OyVey.MODNAME + " 1.0-beta";
             if ((ClickGui.getInstance()).rainbow.getValue().booleanValue()) {
                 if ((ClickGui.getInstance()).rainbowModeHud.getValue() == ClickGui.rainbowMode.Static) {
                     this.renderer.drawString(string, 2.0F, this.waterMarkY.getValue().intValue(), ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB(), true);
@@ -403,7 +403,7 @@ public class HUD extends Module {
     }
 
     public String getCommandMessage() {
-        return TextUtil.coloredString(this.commandBracket.getPlannedValue(), this.bracketColor.getPlannedValue()) + TextUtil.coloredString(this.command.getPlannedValue(), this.commandColor.getPlannedValue()) + TextUtil.coloredString(this.commandBracket2.getPlannedValue(), this.bracketColor.getPlannedValue());
+        return TextUtil.coloredString(this.commandBracket.getPlannedValue(), this.bracketColor.getPlannedValue()) + TextUtil.coloredString(OyVey.MODNAME, this.commandColor.getPlannedValue()) + TextUtil.coloredString(this.commandBracket2.getPlannedValue(), this.bracketColor.getPlannedValue());
     }
 
     public void drawTextRadar(int yOffset) {
