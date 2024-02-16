@@ -24,7 +24,7 @@ public class PigSpammer
             "LOL MISTA IS HOPPING ON LOL THE HORSE IS HOPPING ON",
             "WANNA GO BAND 4 BAND SHITTER? LOL!",
             "I just flew 130 blocks like a butterfly thanks to DotGod.CC!",
-            "XDD THIS IS AN IceCatGod.CC VICTORY LOL",
+            "XDD THIS IS AN DOTGOD.CC VICTORY LOL",
             "XD WANNA COMPARE Muffin UID LOL?"
     };
 
