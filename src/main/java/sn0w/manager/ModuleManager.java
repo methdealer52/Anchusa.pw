@@ -43,6 +43,8 @@ public class ModuleManager
         this.modules.add(new HUD());
         this.modules.add(new KillEffects());
         this.modules.add(new Clip());
+        this.modules.add(new PigSpammer());
+        this.modules.add(new ChestSwap());
     }
 
     public Module getModuleByName(String name) {
