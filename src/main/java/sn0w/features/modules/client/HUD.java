@@ -399,9 +399,8 @@ public class HUD extends Module {
     }
 
     public String getCommandMessage() {
-        return TextUtil.coloredString( TextUtil.coloredString(OyVey.PREFIX, this.commandColor.getPlannedValue()) + TextUtil.coloredString(this.commandBracket2.getPlannedValue(), this.bracketColor.getPlannedValue());
+        return (OyVey.PREFIX);
     }
-
     public void drawTextRadar(int yOffset) {
         if (!this.players.isEmpty()) {
             int y = this.renderer.getFontHeight() + 7 + yOffset;
