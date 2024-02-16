@@ -1,7 +1,6 @@
 package sn0w.mixin.mixins;
 
 import com.google.common.base.Predicate;
-import sn0w.features.modules.misc.Tracker;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -27,9 +26,8 @@ public class MixinWorld {
 
     @Inject(method = {"onEntityAdded"}, at = {@At(value = "HEAD")})
     private void onEntityAdded(Entity entityIn, CallbackInfo ci) {
-        if (Tracker.getInstance().isOn()) {
-            Tracker.getInstance().onSpawnEntity(entityIn);
+
         }
     }
-}
+
 
