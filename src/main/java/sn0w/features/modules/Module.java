@@ -103,7 +103,7 @@ public class Module
         this.onToggle();
         this.onEnable();
         if (HUD.getInstance().notifyToggles.getValue().booleanValue()) {
-            TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + ChatFormatting.BOLD + this.getDisplayName() + ChatFormatting.WHITE + " was" + ChatFormatting.AQUA + " enabled!");
+            TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + " " + ChatFormatting.BOLD + this.getDisplayName() + ChatFormatting.WHITE + " was" + ChatFormatting.AQUA + " enabled!");
             Module.mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(text, 1);
         }
         if (this.isOn() && this.hasListener && !this.alwaysListening) {
@@ -117,7 +117,7 @@ public class Module
         }
         this.enabled.setValue(false);
         if (HUD.getInstance().notifyToggles.getValue().booleanValue()) {
-            TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + ChatFormatting.BOLD + this.getDisplayName() + ChatFormatting.WHITE + " was" + ChatFormatting.BLUE + " disabled!");
+            TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + " " + ChatFormatting.BOLD + this.getDisplayName() + ChatFormatting.WHITE + " was" + ChatFormatting.BLUE + " disabled!");
             Module.mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(text, 1);
         }
         this.onToggle();
