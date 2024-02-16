@@ -1,19 +1,20 @@
 package sn0w;
 
-import sn0w.manager.*;
+import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
+import sn0w.manager.*;
 
 @Mod(modid = "sn0w", name = "Sn0w", version = "1.0")
 public class OyVey {
     public static final String MODID = "sn0w";
     public static final String MODNAME = "Sn0w";
     public static final String MODVER = "1,0";
-    public static final String PREFIX = "\u2744";
+    public static final String PREFIX = ChatFormatting.AQUA + "\u2744";
     public static final Logger LOGGER = LogManager.getLogger("Sn0w");
     public static CommandManager commandManager;
     public static FriendManager friendManager;
