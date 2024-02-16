@@ -10,6 +10,7 @@ import sn0w.features.modules.Module;
 import sn0w.features.modules.client.ClickGui;
 import sn0w.features.modules.client.FontMod;
 import sn0w.features.modules.client.HUD;
+import sn0w.features.modules.exploit.Clip;
 import sn0w.util.Util;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
@@ -41,6 +42,7 @@ public class ModuleManager
         this.modules.add(new FontMod());
         this.modules.add(new HUD());
         this.modules.add(new KillEffects());
+        this.modules.add(new Clip());
     }
 
     public Module getModuleByName(String name) {
