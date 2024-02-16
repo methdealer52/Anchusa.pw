@@ -22,8 +22,27 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version project.modVersion
-group project.modGroup //http://maven.apache.org/guides/mini/guide-naming-conventions.html
+String characters = "ABCDEFGHILMNOPQRSTUVWXYZabcdefghilmnopqrstuvwxyz0123456789"
+String randomString = ""
+
+Random rand = new Random()
+char[] text = new char[15]
+for (int i = 0; i < 15; i++){
+    text[i] = characters.charAt(rand.nextInt(characters.length()))
+}
+
+for (int i = 0; i < 15; i++){
+    randomString += text[i]
+}
+
+File libs = file buildDir.getAbsolutePath() + '/libs/'
+if (libs.exists() && libs.isDirectory()) {
+    for (File file in libs.listFiles()) {
+        file.delete()
+    }
+}
+version "1.0-beta+" + randomString
+group "Snow"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
