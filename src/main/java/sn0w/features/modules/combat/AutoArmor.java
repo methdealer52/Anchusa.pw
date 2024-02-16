@@ -29,7 +29,7 @@ public class AutoArmor
     boolean flag;
 
     public AutoArmor() {
-        super("AutoArmor", "Puts Armor on for you.", Module.Category.COMBAT, true, false, false);
+        super("AutoArmor", "Puts Armor on for you.", Module.Category.COMBAT);
     }
 
     @Override

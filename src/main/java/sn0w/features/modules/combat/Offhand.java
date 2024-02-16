@@ -54,7 +54,7 @@ public class Offhand
     private boolean switchedForHealthReason = false;
 
     public Offhand() {
-        super("Offhand", "Allows you to switch up your Offhand.", Module.Category.COMBAT, true, false, false);
+        super("Offhand", "Allows you to switch up your Offhand.", Module.Category.COMBAT);
         instance = this;
     }
 

@@ -32,7 +32,7 @@ public class ArrowESP
     private final EntityListener entityListener = new EntityListener();
 
     public ArrowESP() {
-        super("ArrowESP", "Arrow tracers ", Module.Category.RENDER, true, false, false);
+        super("ArrowESP", "Arrow tracers ", Module.Category.RENDER);
     }
 
     @Override

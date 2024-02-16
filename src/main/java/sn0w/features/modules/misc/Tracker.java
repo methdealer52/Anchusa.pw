@@ -21,7 +21,7 @@ public class Tracker
     private int usedStacks = 0;
 
     public Tracker() {
-        super("Duel", "Tracks players in 1v1s.", Module.Category.MISC, true, false, false);
+        super("Duel", "Tracks players in 1v1s.", Module.Category.MISC);
         instance = this;
     }
 

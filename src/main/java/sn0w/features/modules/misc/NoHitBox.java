@@ -11,7 +11,7 @@ public class NoHitBox
     public Setting<Boolean> gapple = this.register(new Setting<Boolean>("Gapple", true));
 
     public NoHitBox() {
-        super("NoHitBox", "NoHitBox.", Module.Category.MISC, false, false, false);
+        super("NoHitBox", "NoHitBox.", Module.Category.MISC);
         this.setInstance();
     }
 

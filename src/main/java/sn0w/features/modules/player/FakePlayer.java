@@ -18,7 +18,7 @@ public class FakePlayer
     private EntityOtherPlayerMP _fakePlayer;
 
     public FakePlayer() {
-        super("FakePlayer", "Spawns a FakePlayer for testing", Module.Category.PLAYER, false, false, false);
+        super("FakePlayer", "Spawns a FakePlayer for testing", Module.Category.PLAYER);
     }
 
     public static String getUuid(String name) {

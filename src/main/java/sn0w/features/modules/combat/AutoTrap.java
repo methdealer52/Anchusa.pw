@@ -40,7 +40,7 @@ public class AutoTrap
     private BlockPos startPos = null;
 
     public AutoTrap() {
-        super("AutoTrap", "Traps other players", Module.Category.COMBAT, true, false, false);
+        super("AutoTrap", "Traps other players", Module.Category.COMBAT);
     }
 
     @Override

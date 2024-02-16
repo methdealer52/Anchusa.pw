@@ -41,7 +41,7 @@ public class Surround
     private boolean offHand = false;
 
     public Surround() {
-        super("Surround", "Surrounds you with Obsidian", Module.Category.COMBAT, true, false, false);
+        super("Surround", "Surrounds you with Obsidian", Module.Category.COMBAT);
     }
 
     @Override

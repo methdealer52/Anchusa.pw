@@ -32,7 +32,7 @@ public class ESP
     private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
 
     public ESP() {
-        super("ESP", "Renders a nice ESP.", Module.Category.RENDER, false, false, false);
+        super("ESP", "Renders a nice ESP.", Module.Category.RENDER);
         this.setInstance();
     }
 
