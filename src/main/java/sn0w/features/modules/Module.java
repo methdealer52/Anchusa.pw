@@ -65,7 +65,8 @@ public class Module
     public void onLogout() {
     }
 
-    public void onUpdate() {
+    public int onUpdate() {
+        return 0;
     }
 
     public void onRender2D(Render2DEvent event) {
@@ -188,6 +189,7 @@ public class Module
         RENDER("Render"),
         MOVEMENT("Movement"),
         PLAYER("Player"),
+        EXPLOIT("Exploit"),
         CLIENT("Client");
 
         private final String name;
