@@ -45,6 +45,7 @@ public class ModuleManager
         this.modules.add(new Clip());
         this.modules.add(new PigSpammer());
         this.modules.add(new ChestSwap());
+        this.modules.add(new SilentXP());
     }
 
     public Module getModuleByName(String name) {
