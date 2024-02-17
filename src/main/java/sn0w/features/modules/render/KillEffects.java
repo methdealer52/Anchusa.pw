@@ -1,7 +1,7 @@
 
 package sn0w.features.modules.render;
 
-import sn0w.features.modules.*;
+import sn0w.features.modules.Module;
 import sn0w.features.setting.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
