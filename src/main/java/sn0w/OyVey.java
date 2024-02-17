@@ -13,7 +13,6 @@ import sn0w.manager.*;
 public class OyVey {
     public static final String MODID = "sn0w";
     public static final String MODNAME = "Sn0w";
-    public static final String MODVER = "1,0";
     public static final String PREFIX = ChatFormatting.AQUA + "\u2744";
     public static final Logger LOGGER = LogManager.getLogger("Sn0w");
     public static CommandManager commandManager;

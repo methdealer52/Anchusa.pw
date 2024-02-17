@@ -56,7 +56,7 @@ public class CommandManager
             c.execute(parts);
             return;
         }
-        Command.sendMessage(ChatFormatting.GRAY + "Command not found, type 'help' for the commands list.");
+        Command.sendMessage(ChatFormatting.GRAY + "dumb ahh nigga that isn't a command.");
     }
 
     public Command getCommandByName(String name) {
