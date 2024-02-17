@@ -296,7 +296,7 @@ public class HUD extends Module {
         int width = this.renderer.scaledWidth;
         String text = "";
         if (this.greeter.getValue().booleanValue())
-            text = text + MathUtil.getTimeOfDay() + mc.player.getDisplayNameString();
+            text = text + "Welcome " + mc.player.getDisplayNameString() + " :^)";
         if ((ClickGui.getInstance()).rainbow.getValue().booleanValue()) {
             if ((ClickGui.getInstance()).rainbowModeHud.getValue() == ClickGui.rainbowMode.Static) {
                 this.renderer.drawString(text, width / 2.0F - this.renderer.getStringWidth(text) / 2.0F + 2.0F, 2.0F, ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRGB(), true);
