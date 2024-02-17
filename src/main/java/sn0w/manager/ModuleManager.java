@@ -21,10 +21,7 @@ import sn0w.features.modules.movement.*;
 import sn0w.features.modules.player.*;
 import sn0w.features.modules.render.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -49,33 +46,30 @@ public class ModuleManager
     }
 
     public Module getModuleByName(String name) {
-        for (Module module : this.modules) {
-            if (!module.getName().equalsIgnoreCase(name)) continue;
-            return module;
-        }
-        return null;
+        Optional<Module> optionalModule = modules.stream()
+                .filter(module -> module.getName().equalsIgnoreCase(name))
+                .findFirst();
+
+        return optionalModule.orElse(null);
     }
 
     public <T extends Module> T getModuleByClass(Class<T> clazz) {
-        for (Module module : this.modules) {
-            if (!clazz.isInstance(module)) continue;
-            return (T) module;
-        }
-        return null;
+        Optional<T> optionalModule = this.modules.stream()
+                .filter(clazz::isInstance)
+                .map(clazz::cast)
+                .findFirst();
+
+        return optionalModule.orElse(null);
     }
 
     public void enableModule(Class<Module> clazz) {
         Module module = this.getModuleByClass(clazz);
-        if (module != null) {
-            module.enable();
-        }
+        if (module != null) module.enable();
     }
 
     public void disableModule(Class<Module> clazz) {
         Module module = this.getModuleByClass(clazz);
-        if (module != null) {
-            module.disable();
-        }
+        if (module != null) module.disable();
     }
 
     public void enableModule(String name) {
@@ -87,9 +81,7 @@ public class ModuleManager
 
     public void disableModule(String name) {
         Module module = this.getModuleByName(name);
-        if (module != null) {
-            module.disable();
-        }
+        if (module != null) module.disable();
     }
 
     public boolean isModuleEnabled(String name) {
@@ -103,39 +95,30 @@ public class ModuleManager
     }
 
     public Module getModuleByDisplayName(String displayName) {
-        for (Module module : this.modules) {
-            if (!module.getDisplayName().equalsIgnoreCase(displayName)) continue;
-            return module;
-        }
-        return null;
+        Optional<Module> optionalModule = modules.stream()
+                .filter(module -> module.getDisplayName().equalsIgnoreCase(displayName))
+                .findFirst();
+
+        return optionalModule.orElse(null);
     }
 
     public ArrayList<Module> getEnabledModules() {
-        ArrayList<Module> enabledModules = new ArrayList<Module>();
-        for (Module module : this.modules) {
-            if (!module.isEnabled()) continue;
-            enabledModules.add(module);
-        }
-        return enabledModules;
+        return modules.stream()
+                .filter(Feature::isEnabled)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<String> getEnabledModulesName() {
-        ArrayList<String> enabledModules = new ArrayList<String>();
-        for (Module module : this.modules) {
-            if (!module.isEnabled() || !module.isDrawn()) continue;
-            enabledModules.add(module.getFullArrayString());
-        }
-        return enabledModules;
+        return this.modules.stream()
+                .filter(module -> module.isEnabled() && module.isDrawn())
+                .map(Module::getFullArrayString)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Module> getModulesByCategory(Module.Category category) {
-        ArrayList<Module> modulesCategory = new ArrayList<Module>();
-        this.modules.forEach(module -> {
-            if (module.getCategory() == category) {
-                modulesCategory.add(module);
-            }
-        });
-        return modulesCategory;
+        return this.modules.stream()
+                .filter(module -> module.getCategory() == category)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public List<Module.Category> getCategories() {
@@ -143,28 +126,42 @@ public class ModuleManager
     }
 
     public void onLoad() {
-        this.modules.stream().filter(Module::listening).forEach(((EventBus) MinecraftForge.EVENT_BUS)::register);
+        this.modules.stream()
+                .filter(Module::listening)
+                .forEach(((EventBus) MinecraftForge.EVENT_BUS)::register);
+
         this.modules.forEach(Module::onLoad);
     }
 
     public void onUpdate() {
-        this.modules.stream().filter(Feature::isEnabled).forEach(Module::onUpdate);
+        this.modules.stream()
+                .filter(Feature::isEnabled)
+                .forEach(Module::onUpdate);
     }
 
     public void onTick() {
-        this.modules.stream().filter(Feature::isEnabled).forEach(Module::onTick);
+        this.modules.stream()
+                .filter(Feature::isEnabled)
+                .forEach(Module::onTick);
     }
 
     public void onRender2D(Render2DEvent event) {
-        this.modules.stream().filter(Feature::isEnabled).forEach(module -> module.onRender2D(event));
+        this.modules.stream().
+                filter(Feature::isEnabled)
+                .forEach(module -> module.onRender2D(event));
     }
 
     public void onRender3D(Render3DEvent event) {
-        this.modules.stream().filter(Feature::isEnabled).forEach(module -> module.onRender3D(event));
+        this.modules.stream()
+                .filter(Feature::isEnabled)
+                .forEach(module -> module.onRender3D(event));
     }
 
     public void sortModules(boolean reverse) {
-        this.sortedModules = this.getEnabledModules().stream().filter(Module::isDrawn).sorted(Comparator.comparing(module -> this.renderer.getStringWidth(module.getFullArrayString()) * (reverse ? -1 : 1))).collect(Collectors.toList());
+        this.sortedModules = this.getEnabledModules().stream()
+                .filter(Module::isDrawn)
+                .sorted(Comparator.comparing(module -> this.renderer.getStringWidth(module.getFullArrayString()) * (reverse ? -1 : 1)))
+                .collect(Collectors.toList());
     }
 
     public void sortModulesABC() {
@@ -186,20 +183,14 @@ public class ModuleManager
     }
 
     public void onUnloadPost() {
-        for (Module module : this.modules) {
-            module.enabled.setValue(false);
-        }
+        this.modules.forEach(module -> module.enabled.setValue(false));
     }
 
     public void onKeyPressed(int eventKey) {
-        if (eventKey == 0 || !Keyboard.getEventKeyState() || ModuleManager.mc.currentScreen instanceof OyVeyGui) {
-            return;
-        }
-        this.modules.forEach(module -> {
-            if (module.getBind().getKey() == eventKey) {
-                module.toggle();
-            }
-        });
+        if (eventKey == 0 || !Keyboard.getEventKeyState() || ModuleManager.mc.currentScreen instanceof OyVeyGui) return;
+        this.modules.stream()
+                .filter(module -> module.getBind().getKey() == eventKey)
+                .forEach(Module::toggle);
     }
 
     private class Animation
