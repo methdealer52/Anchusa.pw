@@ -14,7 +14,7 @@ public class MCF
     private boolean clicked = false;
 
     public MCF() {
-        super("MCF", "Middleclick Friends.", Module.Category.MISC);
+        super("MCF", "Middleclick Friends.", Module.Category.MISC, true, false, false);
     }
 
     @Override
