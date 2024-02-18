@@ -1,5 +1,5 @@
-# sn0w
+# Anchusa.pw
 
 BEST 1.12.2 CLIENT EVER MADE
 
-- MADE BY JQQ & SKITTTYY & JOHNMCSWAG AND BRUH77
+- luvbanz, audsis and logging4j
