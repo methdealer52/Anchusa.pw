@@ -21,7 +21,7 @@ public class PearlNotify extends Module {
     private boolean flag;
 
     public PearlNotify() {
-        super("PearlNotify", "Notify pearl throws.", Category.MISC, true, false, false);
+        super("PearlNotify", "Notify pearl throws.", Category.MISC);
         this.list = new HashMap<EntityPlayer, UUID>();
     }
 
