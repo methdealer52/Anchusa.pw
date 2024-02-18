@@ -13,7 +13,7 @@ public class SelfFill
     private final Setting<Boolean> packet = this.register(new Setting<Boolean>("PacketPlace", Boolean.FALSE));
 
     public SelfFill() {
-        super("SelfFill", "SelfFills yourself in a hole.", Module.Category.COMBAT);
+        super("SelfFill", "SelfFills yourself in a hole.", Module.Category.COMBAT, true, false, false);
     }
 
     @Override

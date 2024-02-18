@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class BuildHeight
         extends Module {
     public BuildHeight() {
-        super("BuildHeight", "Allows you to place at build height", Module.Category.MISC);
+        super("BuildHeight", "Allows you to place at build height", Module.Category.MISC, true, false, false);
     }
 
     @SubscribeEvent

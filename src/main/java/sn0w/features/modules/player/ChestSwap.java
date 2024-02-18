@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 public class ChestSwap
         extends Module {
     public ChestSwap() {
-        super("Chest Swap", "Highlights the block u look at.", Category.PLAYER);
+        super("Chest Swap", "Highlights the block u look at.", Category.PLAYER, true, false, false);
     }
 
 

@@ -7,7 +7,7 @@ public class LiquidInteract
     private static LiquidInteract INSTANCE = new LiquidInteract();
 
     public LiquidInteract() {
-        super("LiquidInteract", "Interact with liquids", Module.Category.PLAYER);
+        super("LiquidInteract", "Interact with liquids", Module.Category.PLAYER, true, false, false);
         this.setInstance();
     }
 
