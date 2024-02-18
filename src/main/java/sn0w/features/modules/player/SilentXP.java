@@ -22,7 +22,7 @@ public class SilentXP extends Module
     private boolean on;
 
     public SilentXP() {
-        super("PacketEXP",  "Silent XP.",  Module.Category.PLAYER, true, false, false);
+        super("PacketEXP",  "Silent XP.",  Module.Category.PLAYER);
         this.mode = (Setting<Mode>)this.register(new Setting("Mode", Mode.MIDDLECLICK));
         this.antiFriend = (Setting<Boolean>)this.register(new Setting("AntiFriend", true));
         this.key = (Setting<Bind>)this.register(new Setting("Key", new Bind(-1), v -> this.mode.getValue() != Mode.MIDDLECLICK));

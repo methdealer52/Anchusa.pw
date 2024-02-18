@@ -10,7 +10,7 @@ public class TpsSync
     public Setting<Boolean> mining = this.register(new Setting<Boolean>("Mine", Boolean.TRUE));
 
     public TpsSync() {
-        super("TpsSync", "Syncs your client with the TPS.", Module.Category.PLAYER, true, false, false);
+        super("TpsSync", "Syncs your client with the TPS.", Module.Category.PLAYER);
         this.setInstance();
     }
 

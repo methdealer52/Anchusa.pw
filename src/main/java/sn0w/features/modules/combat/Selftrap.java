@@ -33,7 +33,7 @@ public class Selftrap
     private boolean hasOffhand = false;
 
     public Selftrap() {
-        super("Selftrap", "Lure your enemies in!", Module.Category.COMBAT, true, false, false);
+        super("Selftrap", "Lure your enemies in!", Module.Category.COMBAT);
     }
 
     @Override

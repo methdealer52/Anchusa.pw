@@ -23,7 +23,7 @@ import java.util.List;
 
 public class Trajectories extends Module {
     public Trajectories() {
-        super("Trajectories", "Draws trajectories.", Category.RENDER, true, false, false);
+        super("Trajectories", "Draws trajectories.", Category.RENDER);
     }
 
     @Override

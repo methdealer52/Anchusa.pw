@@ -30,7 +30,7 @@ public class Module
     public float vOffset;
     public boolean sliding;
 
-    public Module(String name, String description, Category category, boolean b, boolean b1, boolean b2) {
+    public Module(String name, String description, Category category) {
         super(name);
         this.displayName = this.register(new Setting<String>("DisplayName", name));
         this.description = description;

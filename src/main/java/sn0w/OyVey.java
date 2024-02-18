@@ -9,12 +9,12 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 import sn0w.manager.*;
 
-@Mod(modid = "sn0w", name = "Sn0w", version = "1.0")
+@Mod(modid = "anchusa", name = "Anchusa", version = "1.0")
 public class OyVey {
-    public static final String MODID = "sn0w";
-    public static final String MODNAME = "Sn0w";
-    public static final String PREFIX = ChatFormatting.BLUE + "[" + "\u2744" + "]";
-    public static final Logger LOGGER = LogManager.getLogger("Sn0w");
+    public static final String MODID = "anchusa";
+    public static final String MODNAME = "Anchusa";
+    public static final String PREFIX = ChatFormatting.LIGHT_PURPLE + "[" +  "Anchusa" + "]";
+    public static final Logger LOGGER = LogManager.getLogger("Anchusa");
     public static CommandManager commandManager;
     public static FriendManager friendManager;
     public static ModuleManager moduleManager;
@@ -41,7 +41,7 @@ public class OyVey {
     }
 
     public static void load() {
-        LOGGER.info("\n\nLoading Sn0w by nw0p");
+        LOGGER.info("\n\nLoading Anchusa by luv");
         unloaded = false;
         if (reloadManager != null) {
             reloadManager.unload();
@@ -71,11 +71,11 @@ public class OyVey {
         LOGGER.info("EventManager loaded.");
         textManager.init(true);
         moduleManager.onLoad();
-        LOGGER.info("Sn0w successfully loaded!\n");
+        LOGGER.info("Anchusa successfully loaded!\n");
     }
 
     public static void unload(boolean unload) {
-        LOGGER.info("\n\nUnloading Sn0w by Alpha432");
+        LOGGER.info("\n\nUnloading Anchusa by luv");
         if (unload) {
             reloadManager = new ReloadManager();
             reloadManager.init(commandManager != null ? commandManager.getPrefix() : ".");
@@ -96,7 +96,7 @@ public class OyVey {
         inventoryManager = null;
         moduleManager = null;
         textManager = null;
-        LOGGER.info("Sn0w unloaded!\n");
+        LOGGER.info("Anchusa unloaded!\n");
     }
 
     public static void reload() {
@@ -121,7 +121,7 @@ public class OyVey {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Display.setTitle("Sn0w 1.0 | Minecraft 1.12.2");
+        Display.setTitle("Anchusa 1.0 | Minecraft 1.12.2");
         OyVey.load();
     }
 }

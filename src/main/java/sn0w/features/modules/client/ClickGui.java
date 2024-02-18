@@ -33,7 +33,7 @@ public class ClickGui
     private OyVeyGui click;
 
     public ClickGui() {
-        super("ClickGui", "Opens the ClickGui", Module.Category.CLIENT, true, false, false);
+        super("ClickGui", "Opens the ClickGui", Module.Category.CLIENT);
         this.setInstance();
     }
 
