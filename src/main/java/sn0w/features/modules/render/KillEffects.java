@@ -39,7 +39,7 @@ public class KillEffects extends Module
     final Object sync;
 
     public KillEffects() {
-        super("DeathEffects", "When you kill something it spawns shit.", Module.Category.RENDER, true, false, false);
+        super("DeathEffects", "When you kill something it spawns shit.", Module.Category.RENDER);
         this.thunder = (Setting<Boolean>)this.register(new Setting("Thunder", (Object)true));
         this.numbersThunder = (Setting<Integer>)this.register(new Setting("Number Thunder", (Object)1, (Object)1, (Object)10));
         this.sound = (Setting<Boolean>)this.register(new Setting("Sound", (Object)true));

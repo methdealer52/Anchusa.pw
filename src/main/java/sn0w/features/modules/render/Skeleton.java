@@ -24,7 +24,7 @@ public class Skeleton
     private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
 
     public Skeleton() {
-        super("Skeleton", "Draws a skeleton inside the player.", Module.Category.RENDER, true, false, false);
+        super("Skeleton", "Draws a skeleton inside the player.", Module.Category.RENDER);
     }
 
     public static void addEntity(EntityPlayer e, ModelPlayer model) {

@@ -33,7 +33,7 @@ public class PigSpammer
     private Timer timer = new Timer();
 
     public PigSpammer() {
-        super("PigSpammer", "Automatically makes you spam shit bait", Category.PLAYER, true, false, false);
+        super("PigSpammer", "Automatically makes you spam shit bait", Category.PLAYER);
     }
 
     @Override
