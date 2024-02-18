@@ -41,7 +41,7 @@ public class HoleFiller extends Module {
     private int trie;
 
     public HoleFiller() {
-        super("HoleFiller", "Fills holes around you.", Category.COMBAT, true, false, false);
+        super("HoleFiller", "Fills holes around you.", Category.COMBAT);
         this.range = (Setting<Integer>) this.register(new Setting("PlaceRange", 8, 0, 10));
         this.delay = (Setting<Integer>) this.register(new Setting("Delay", 50, 0, 250));
         this.blocksPerTick = (Setting<Integer>) this.register(new Setting("BlocksPerTick", 20, 8, 30));
