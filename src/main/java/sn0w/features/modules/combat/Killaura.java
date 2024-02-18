@@ -29,7 +29,7 @@ public class Killaura extends Module {
     public Setting<Boolean> packet = register(new Setting("Packet", Boolean.valueOf(false)));
 
     public Killaura() {
-        super("Killaura", "Kills aura.", Module.Category.COMBAT);
+        super("Killaura", "Kills aura.", Module.Category.COMBAT, true, false, false);
     }
 
     public void onTick() {

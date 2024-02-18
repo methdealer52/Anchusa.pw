@@ -37,7 +37,7 @@ public class Speedmine
     public IBlockState currentBlockState;
 
     public Speedmine() {
-        super("Speedmine", "Speeds up mining.", Module.Category.PLAYER);
+        super("Speedmine", "Speeds up mining.", Module.Category.PLAYER, true, false, false);
         this.setInstance();
     }
 
