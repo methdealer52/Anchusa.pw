@@ -35,7 +35,7 @@ public class AutoMinecart
     private boolean check;
 
     public AutoMinecart() {
-        super("AutoMinecart", "Places and explodes minecarts on other players.", Module.Category.COMBAT);
+        super("AutoMinecart", "Places and explodes minecarts on other players.", Module.Category.COMBAT, true, false, false);
     }
 
     @Override

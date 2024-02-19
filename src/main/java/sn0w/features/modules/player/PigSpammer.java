@@ -30,7 +30,7 @@ public class PigSpammer extends Module {
     private Timer timer = new Timer();
 
     public PigSpammer() {
-        super("PigSpammer", "Automatically makes you spam shit bait", Category.PLAYER);
+        super("PigSpammer", "Automatically makes you spam shit bait", Category.PLAYER, true, false, false);
     }
 
     @Override

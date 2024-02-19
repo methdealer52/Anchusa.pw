@@ -6,7 +6,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class NoVoid extends Module {
     public NoVoid() {
-        super("NoVoid", "Glitches you up from void.", Module.Category.MOVEMENT);
+        super("NoVoid", "Glitches you up from void.", Module.Category.MOVEMENT, true, false, false);
     }
 
     @Override

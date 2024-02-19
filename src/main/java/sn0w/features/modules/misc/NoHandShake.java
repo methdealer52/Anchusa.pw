@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 public class NoHandShake
         extends Module {
     public NoHandShake() {
-        super("NoHandshake", "Doesnt send your modlist to the server.", Module.Category.MISC);
+        super("NoHandshake", "Doesnt send your modlist to the server.", Module.Category.MISC, true, false, false);
     }
 
     @SubscribeEvent

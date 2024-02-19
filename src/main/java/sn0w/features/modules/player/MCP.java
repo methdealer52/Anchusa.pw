@@ -11,7 +11,7 @@ public class MCP extends Module {
     private boolean clicked = false;
 
     public MCP() {
-        super("MCP", "Throws a pearl", Module.Category.PLAYER);
+        super("MCP", "Throws a pearl", Module.Category.PLAYER, true, false, false);
     }
 
     @Override

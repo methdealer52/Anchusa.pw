@@ -11,7 +11,7 @@ public class ReverseStep extends Module {
     private final Setting<Boolean> twoBlocks = this.register(new Setting<Boolean>("2Blocks", Boolean.FALSE));
 
     public ReverseStep() {
-        super("ReverseStep", "ReverseStep.", Module.Category.MOVEMENT);
+        super("ReverseStep", "ReverseStep.", Module.Category.MOVEMENT, true, false, false);
         this.setInstance();
     }
 

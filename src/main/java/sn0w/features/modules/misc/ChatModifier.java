@@ -15,7 +15,7 @@ public class ChatModifier
     public boolean check;
 
     public ChatModifier() {
-        super("BetterChat", "Modifies your chat", Module.Category.MISC);
+        super("BetterChat", "Modifies your chat", Module.Category.MISC, true, false, false);
         this.setInstance();
     }
 

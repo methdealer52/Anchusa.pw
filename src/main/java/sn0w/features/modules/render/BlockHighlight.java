@@ -17,7 +17,7 @@ public class BlockHighlight
     private final Setting<Integer> cAlpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
 
     public BlockHighlight() {
-        super("BlockHighlight", "Highlights the block u look at.", Module.Category.RENDER);
+        super("BlockHighlight", "Highlights the block u look at.", Module.Category.RENDER, true, false, false);
     }
 
     @Override
