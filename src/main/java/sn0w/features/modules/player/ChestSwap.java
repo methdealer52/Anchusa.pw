@@ -23,27 +23,25 @@ public class ChestSwap
     @Override
     public void onEnable() {
         Command.sendMessage("Swapped the chest slot");
-        if (ChestSwap.mc.player == null) {
-            return;
-        }
-        ItemStack itemStack = ChestSwap.mc.player.inventoryContainer.getSlot(6).getStack();
+        if (fullNullCheck()) return;
+        ItemStack itemStack = mc.player.inventoryContainer.getSlot(6).getStack();
         if (itemStack.isEmpty()) {
             int n = this.FindChestItem(true);
             if (n != -1) {
-                ChestSwap.mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, ChestSwap.mc.player);
-                ChestSwap.mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, 6, 0, ClickType.PICKUP, ChestSwap.mc.player);
-                ChestSwap.mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, ChestSwap.mc.player);
-                ChestSwap.mc.playerController.updateController();
+                mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, mc.player);
+                mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, 6, 0, ClickType.PICKUP, mc.player);
+                mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, mc.player);
+                mc.playerController.updateController();
             }
             this.toggle();
             return;
         }
         int n = this.FindChestItem(itemStack.getItem() instanceof ItemArmor);
         if (n != -1) {
-            ChestSwap.mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, ChestSwap.mc.player);
-            ChestSwap.mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, 6, 0, ClickType.PICKUP, ChestSwap.mc.player);
-            ChestSwap.mc.playerController.windowClick(ChestSwap.mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, ChestSwap.mc.player);
-            ChestSwap.mc.playerController.updateController();
+            mc.playerController.windowClick(mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, mc.player);
+            mc.playerController.windowClick(mc.player.inventoryContainer.windowId, 6, 0, ClickType.PICKUP, mc.player);
+            mc.playerController.windowClick(mc.player.inventoryContainer.windowId, n, 0, ClickType.PICKUP, mc.player);
+            mc.playerController.updateController();
         }
         this.toggle();
     }
@@ -51,7 +49,7 @@ public class ChestSwap
     private int FindChestItem(boolean bl) {
         int n = -1;
         float f = 0.0f;
-        for (int i = 0; i < ChestSwap.mc.player.inventoryContainer.getInventory().size(); ++i) {
+        for (int i = 0; i < mc.player.inventoryContainer.getInventory().size(); ++i) {
             ItemStack itemStack;
             if (i == 0 || i == 5 || i == 6 || i == 7 || i == 8 || (itemStack = (ItemStack)ChestSwap.mc.player.inventoryContainer.getInventory().get(i)) == null || itemStack.getItem() == Items.AIR) continue;
             if (itemStack.getItem() instanceof ItemArmor) {

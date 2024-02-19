@@ -6,8 +6,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 
-public class ReverseStep
-        extends Module {
+public class ReverseStep extends Module {
     private static ReverseStep INSTANCE = new ReverseStep();
     private final Setting<Boolean> twoBlocks = this.register(new Setting<Boolean>("2Blocks", Boolean.FALSE));
 
@@ -29,20 +28,14 @@ public class ReverseStep
 
     @Override
     public int onUpdate() {
-        if (ReverseStep.fullNullCheck()) {
-            return 0;
-        }
-        IBlockState touchingState = ReverseStep.mc.world.getBlockState(new BlockPos(ReverseStep.mc.player.posX, ReverseStep.mc.player.posY, ReverseStep.mc.player.posZ).down(2));
-        IBlockState touchingState2 = ReverseStep.mc.world.getBlockState(new BlockPos(ReverseStep.mc.player.posX, ReverseStep.mc.player.posY, ReverseStep.mc.player.posZ).down(3));
-        if (ReverseStep.mc.player.isInLava() || ReverseStep.mc.player.isInWater()) {
-            return 0;
-        }
+        if (fullNullCheck()) return 0;
+        IBlockState touchingState = mc.world.getBlockState(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ).down(2));
+        IBlockState touchingState2 = mc.world.getBlockState(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ).down(3));
+        if (mc.player.isInLava() || mc.player.isInWater()) return 0;
         if (touchingState.getBlock() == Blocks.BEDROCK || touchingState.getBlock() == Blocks.OBSIDIAN) {
-            if (ReverseStep.mc.player.onGround) {
-                ReverseStep.mc.player.motionY -= 1.0;
-            }
+            if (mc.player.onGround) mc.player.motionY -= 1.0;
         } else if ((this.twoBlocks.getValue().booleanValue() && touchingState2.getBlock() == Blocks.BEDROCK || this.twoBlocks.getValue().booleanValue() && touchingState2.getBlock() == Blocks.OBSIDIAN) && ReverseStep.mc.player.onGround) {
-            ReverseStep.mc.player.motionY -= 1.0;
+            mc.player.motionY -= 1.0;
         }
         return 0;
     }

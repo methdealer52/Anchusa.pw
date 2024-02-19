@@ -9,14 +9,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Replenish
-        extends Module {
+public class Replenish extends Module {
     private final Setting<Integer> delay = this.register(new Setting<Integer>("Delay", 0, 0, 10));
     private final Setting<Integer> gapStack = this.register(new Setting<Integer>("GapStack", 1, 50, 64));
     private final Setting<Integer> xpStackAt = this.register(new Setting<Integer>("XPStack", 1, 50, 64));
     private final Timer timer = new Timer();
-    private final ArrayList<Item> Hotbar = new ArrayList();
+    private final ArrayList<Item> hotbar = new ArrayList();
 
     public Replenish() {
         super("Replenish", "Replenishes your hotbar", Module.Category.PLAYER);
@@ -24,65 +24,49 @@ public class Replenish
 
     @Override
     public void onEnable() {
-        if (Replenish.fullNullCheck()) {
-            return;
-        }
-        this.Hotbar.clear();
-        for (int l_I = 0; l_I < 9; ++l_I) {
-            ItemStack l_Stack = Replenish.mc.player.inventory.getStackInSlot(l_I);
-            if (!l_Stack.isEmpty() && !this.Hotbar.contains(l_Stack.getItem())) {
-                this.Hotbar.add(l_Stack.getItem());
+        if (fullNullCheck()) return;
+        this.hotbar.clear();
+        for (int i = 0; i < 9; ++i) {
+            ItemStack stack = mc.player.inventory.getStackInSlot(i);
+            if (!stack.isEmpty() && !this.hotbar.contains(stack.getItem())) {
+                this.hotbar.add(stack.getItem());
                 continue;
             }
-            this.Hotbar.add(Items.AIR);
+            this.hotbar.add(Items.AIR);
         }
     }
 
     @Override
     public int onUpdate() {
-        if (Replenish.mc.currentScreen != null) {
-            return 0;
-        }
-        if (!this.timer.passedMs(this.delay.getValue() * 1000)) {
-            return 0;
-        }
-        for (int l_I = 0; l_I < 9; ++l_I) {
-            if (!this.RefillSlotIfNeed(l_I)) continue;
+        if (mc.currentScreen != null) return 0;
+        if (!this.timer.passedMs(this.delay.getValue() * 1000)) return 0;
+        for (int i = 0; i < 9; ++i) {
+            if (!this.RefillSlotIfNeed(i)) continue;
             this.timer.reset();
-            return l_I;
+            return i;
         }
         return 0;
     }
 
     private boolean RefillSlotIfNeed(int p_Slot) {
-        ItemStack l_Stack = Replenish.mc.player.inventory.getStackInSlot(p_Slot);
-        if (l_Stack.isEmpty() || l_Stack.getItem() == Items.AIR) {
-            return false;
-        }
-        if (!l_Stack.isStackable()) {
-            return false;
-        }
-        if (l_Stack.getCount() >= l_Stack.getMaxStackSize()) {
-            return false;
-        }
-        if (l_Stack.getItem().equals(Items.GOLDEN_APPLE) && l_Stack.getCount() >= this.gapStack.getValue()) {
-            return false;
-        }
-        if (l_Stack.getItem().equals(Items.EXPERIENCE_BOTTLE) && l_Stack.getCount() > this.xpStackAt.getValue()) {
-            return false;
-        }
-        for (int l_I = 9; l_I < 36; ++l_I) {
-            ItemStack l_Item = Replenish.mc.player.inventory.getStackInSlot(l_I);
-            if (l_Item.isEmpty() || !this.CanItemBeMergedWith(l_Stack, l_Item)) continue;
-            Replenish.mc.playerController.windowClick(Replenish.mc.player.inventoryContainer.windowId, l_I, 0, ClickType.QUICK_MOVE, Replenish.mc.player);
-            Replenish.mc.playerController.updateController();
+        ItemStack stack = mc.player.inventory.getStackInSlot(p_Slot);
+        if (stack.isEmpty() || stack.getItem() == Items.AIR) return false;
+        if (!stack.isStackable()) return false;
+        if (stack.getCount() >= stack.getMaxStackSize()) return false;
+        if (stack.getItem().equals(Items.GOLDEN_APPLE) && stack.getCount() >= this.gapStack.getValue()) return false;
+        if (stack.getItem().equals(Items.EXPERIENCE_BOTTLE) && stack.getCount() > this.xpStackAt.getValue()) return false;
+        for (int i = 9; i < 36; ++i) {
+            ItemStack item = mc.player.inventory.getStackInSlot(i);
+            if (item.isEmpty() || !this.CanItemBeMergedWith(stack, item)) continue;
+            mc.playerController.windowClick(mc.player.inventoryContainer.windowId, i, 0, ClickType.QUICK_MOVE, Replenish.mc.player);
+            mc.playerController.updateController();
             return true;
         }
         return false;
     }
 
-    private boolean CanItemBeMergedWith(ItemStack p_Source, ItemStack p_Target) {
-        return p_Source.getItem() == p_Target.getItem() && p_Source.getDisplayName().equals(p_Target.getDisplayName());
+    private boolean CanItemBeMergedWith(ItemStack stackSource, ItemStack stackTarget) {
+        return stackSource.getItem() == stackTarget.getItem() && stackSource.getDisplayName().equals(stackTarget.getDisplayName());
     }
 }
 

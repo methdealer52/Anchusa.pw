@@ -12,8 +12,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-public class FakePlayer
-        extends Module {
+public class FakePlayer extends Module {
+
     private final String name = "NiggaHack.me";
     private EntityOtherPlayerMP _fakePlayer;
 

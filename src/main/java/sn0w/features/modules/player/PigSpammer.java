@@ -6,11 +6,9 @@ import sn0w.util.Timer;
 
 import java.util.Random;
 
-public class PigSpammer
-        extends Module
-{
+public class PigSpammer extends Module {
 
-    private String[] messages = {
+    private final String[] messages = {
             "LOL FUTURE BETA LOL LOL IM ON BETA",
             "LOL NAUGHTY 864 IS GETTING ON HIS MAIN LOL HES GETTING ON HIS MAIN",
             "THIS IS A FULL PK ENCOUNTER LOL!!",
@@ -29,7 +27,6 @@ public class PigSpammer
     };
 
     private Setting<Integer> delay = register(new Setting<>("Seconds Delay", 7, 1, 20));
-
     private Timer timer = new Timer();
 
     public PigSpammer() {
@@ -37,20 +34,12 @@ public class PigSpammer
     }
 
     @Override
-    public int onUpdate()
-    {
-
-        if (timer.passedS(delay.getValue()))
-        {
-
+    public int onUpdate() {
+        if (timer.passedS(delay.getValue())) {
             Random random = new Random();
-
             mc.player.sendChatMessage(messages[(random.nextInt(messages.length))]);
-
             timer.reset();
-
         }
-
         return 0;
 
     }

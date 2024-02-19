@@ -66,10 +66,8 @@ public class Speedmine
 
     @Override
     public int onUpdate() {
-        if (Speedmine.fullNullCheck()) {
-            return 0;
-        }
-        Speedmine.mc.playerController.blockHitDelay = 0;
+        if (fullNullCheck()) return 0;
+        mc.playerController.blockHitDelay = 0;
         return 0;
     }
 
@@ -83,12 +81,8 @@ public class Speedmine
 
     @SubscribeEvent
     public void onBlockEvent(BlockEvent event) {
-        if (Speedmine.fullNullCheck()) {
-            return;
-        }
-        if (event.getStage() == 3 && Speedmine.mc.playerController.curBlockDamageMP > 0.1f) {
-            Speedmine.mc.playerController.isHittingBlock = true;
-        }
+        if (Speedmine.fullNullCheck()) return;
+        if (event.getStage() == 3 && Speedmine.mc.playerController.curBlockDamageMP > 0.1f) mc.playerController.isHittingBlock = true;
         if (event.getStage() == 4) {
             BlockPos above;
             if (BlockUtil.canBreak(event.pos)) {
@@ -140,7 +134,6 @@ public class Speedmine
         PACKET,
         DAMAGE,
         INSTANT
-
     }
 }
 

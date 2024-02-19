@@ -63,13 +63,10 @@ public class SilentXP extends Module
     }
 
     private boolean toggled() {
-        if (this.key.getValue().getKey() == -1) {
-            return false;
-        }
+        if (this.key.getValue().getKey() == -1) return false;
         if (!Keyboard.isKeyDown(this.key.getValue().getKey())) {
             this.last = true;
-        }
-        else {
+        } else {
             if (Keyboard.isKeyDown(this.key.getValue().getKey()) && this.last && !this.on) {
                 this.last = false;
                 return this.on = true;
@@ -84,25 +81,18 @@ public class SilentXP extends Module
 
     private void throwXP(final boolean mcf) {
         final RayTraceResult result;
-        if (mcf && this.antiFriend.getValue() && (result = SilentXP.mc.objectMouseOver) != null && result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit instanceof EntityPlayer) {
-            return;
-        }
+        if (mcf && this.antiFriend.getValue() && (result = SilentXP.mc.objectMouseOver) != null && result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit instanceof EntityPlayer) return;
         final int xpSlot = InventoryUtil.findHotbarBlock(ItemExpBottle.class);
         final boolean offhand = SilentXP.mc.player.getHeldItemOffhand().getItem() == Items.EXPERIENCE_BOTTLE;
         if (xpSlot != -1 || offhand) {
             final int oldslot = SilentXP.mc.player.inventory.currentItem;
-            if (!offhand) {
-                InventoryUtil.switchToHotbarSlot(xpSlot,  false);
-            }
+            if (!offhand) InventoryUtil.switchToHotbarSlot(xpSlot,  false);
             SilentXP.mc.playerController.processRightClick((EntityPlayer)SilentXP.mc.player,  (World)SilentXP.mc.world,  offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND);
-            if (!offhand) {
-                InventoryUtil.switchToHotbarSlot(oldslot,  false);
-            }
+            if (!offhand) InventoryUtil.switchToHotbarSlot(oldslot,  false);
         }
     }
 
-    public enum Mode
-    {
+    public enum Mode {
         MIDDLECLICK,
         TOGGLE,
         PRESS;
