@@ -34,6 +34,8 @@ public class OyVey {
     public static TextManager textManager;
     @Mod.Instance
     public static OyVey INSTANCE;
+    public static sn0w.manager.TimerManager TimerManager;
+    public static sn0w.manager.TimerManager timerManager;
     private static boolean unloaded;
 
     static {

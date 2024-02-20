@@ -1,6 +1,9 @@
 package sn0w.manager;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.EventBus;
+import org.lwjgl.input.Keyboard;
 import sn0w.OyVey;
 import sn0w.event.events.Render2DEvent;
 import sn0w.event.events.Render3DEvent;
@@ -11,15 +14,13 @@ import sn0w.features.modules.client.ClickGui;
 import sn0w.features.modules.client.FontMod;
 import sn0w.features.modules.client.HUD;
 import sn0w.features.modules.exploit.Clip;
+import sn0w.features.modules.movement.Speed;
+import sn0w.features.modules.player.ChestSwap;
+import sn0w.features.modules.player.PigSpammer;
+import sn0w.features.modules.player.SilentXP;
+import sn0w.features.modules.render.CrystalModifier;
+import sn0w.features.modules.render.KillEffects;
 import sn0w.util.Util;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.EventBus;
-import org.lwjgl.input.Keyboard;
-import sn0w.features.modules.combat.*;
-import sn0w.features.modules.misc.*;
-import sn0w.features.modules.movement.*;
-import sn0w.features.modules.player.*;
-import sn0w.features.modules.render.*;
 
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -43,6 +44,8 @@ public class ModuleManager
         this.modules.add(new PigSpammer());
         this.modules.add(new ChestSwap());
         this.modules.add(new SilentXP());
+        this.modules.add(new CrystalModifier());
+        this.modules.add(new Speed());
     }
 
     public Module getModuleByName(String name) {

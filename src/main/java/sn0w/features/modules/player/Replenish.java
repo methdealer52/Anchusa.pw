@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Replenish extends Module {
     private final Setting<Integer> delay = this.register(new Setting<Integer>("Delay", 0, 0, 10));
