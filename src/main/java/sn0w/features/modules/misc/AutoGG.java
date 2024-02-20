@@ -102,13 +102,13 @@ public class AutoGG
 
     private void doAnnounce(String name) {
         this.targetedPlayers.remove(name);
-        AutoGG.mc.player.connection.sendPacket(new CPacketChatMessage(this.custom.getValue()));
+        AutoGG.mc.player.connection.sendPacket(new CPacketChatMessage(this.custom.getValue(true)));
         int u = 0;
         for (int i = 0; i < 10; ++i) {
             ++u;
         }
-        if (!this.test.getValue().equalsIgnoreCase("null")) {
-            AutoGG.mc.player.connection.sendPacket(new CPacketChatMessage(this.test.getValue()));
+        if (!this.test.getValue(true).equalsIgnoreCase("null")) {
+            AutoGG.mc.player.connection.sendPacket(new CPacketChatMessage(this.test.getValue(true)));
         }
     }
 

@@ -43,14 +43,14 @@ public class ArrowESP
                 EntityPlayer entity = (EntityPlayer) o;
                 Vec3d pos = this.entityListener.getEntityLowerBounds().get(entity);
                 if (pos != null && !this.isOnScreen(pos) && !RenderUtil.isInViewFrustrum(entity)) {
-                    Color color = EntityUtil.getColor(entity, this.red.getValue(), this.green.getValue(), this.blue.getValue(), (int) MathHelper.clamp(255.0f - 255.0f / (float) this.fadeDistance.getValue().intValue() * ArrowESP.mc.player.getDistance(entity), 100.0f, 255.0f), true);
+                    Color color = EntityUtil.getColor(entity, this.red.getValue(true), this.green.getValue(true), this.blue.getValue(true), (int) MathHelper.clamp(255.0f - 255.0f / (float) this.fadeDistance.getValue(true).intValue() * ArrowESP.mc.player.getDistance(entity), 100.0f, 255.0f), true);
                     int x = Display.getWidth() / 2 / (ArrowESP.mc.gameSettings.guiScale == 0 ? 1 : ArrowESP.mc.gameSettings.guiScale);
                     int y = Display.getHeight() / 2 / (ArrowESP.mc.gameSettings.guiScale == 0 ? 1 : ArrowESP.mc.gameSettings.guiScale);
                     float yaw = this.getRotations(entity) - ArrowESP.mc.player.rotationYaw;
                     GL11.glTranslatef((float) x, (float) y, 0.0f);
                     GL11.glRotatef(yaw, 0.0f, 0.0f, 1.0f);
                     GL11.glTranslatef((float) (-x), (float) (-y), 0.0f);
-                    RenderUtil.drawTracerPointer(x, y - this.radius.getValue(), this.size.getValue().floatValue(), 2.0f, 1.0f, this.outline.getValue(), this.outlineWidth.getValue().floatValue(), color.getRGB());
+                    RenderUtil.drawTracerPointer(x, y - this.radius.getValue(true), this.size.getValue(true).floatValue(), 2.0f, 1.0f, this.outline.getValue(true), this.outlineWidth.getValue(true).floatValue(), color.getRGB());
                     GL11.glTranslatef((float) x, (float) y, 0.0f);
                     GL11.glRotatef(-yaw, 0.0f, 0.0f, 1.0f);
                     GL11.glTranslatef((float) (-x), (float) (-y), 0.0f);
@@ -76,7 +76,7 @@ public class ArrowESP
     }
 
     private boolean isValid(EntityPlayer entity) {
-        return entity != ArrowESP.mc.player && (!entity.isInvisible() || this.invisibles.getValue() != false) && entity.isEntityAlive();
+        return entity != ArrowESP.mc.player && (!entity.isInvisible() || this.invisibles.getValue(true) != false) && entity.isEntityAlive();
     }
 
     private float getRotations(EntityLivingBase ent) {

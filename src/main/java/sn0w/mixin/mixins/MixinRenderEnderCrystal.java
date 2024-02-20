@@ -28,7 +28,7 @@ public class MixinRenderEnderCrystal extends Render<EntityEnderCrystal>
 
     @Redirect(method = { "doRender(Lnet/minecraft/entity/item/EntityEnderCrystal;DDDFF)V" }, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelBase;render(Lnet/minecraft/entity/Entity;FFFFFF)V"))
     public void bottomRenderRedirect(final ModelBase modelBase, final Entity entityIn, final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float netHeadYaw, final float headPitch, final float scale) {
-        GlStateManager.scale((float)CrystalModifier.scale.getValue(), (float)CrystalModifier.scale.getValue(), (float)CrystalModifier.scale.getValue());
+        GlStateManager.scale((float)CrystalModifier.scale.getValue(true), (float)CrystalModifier.scale.getValue(true), (float)CrystalModifier.scale.getValue(true));
         modelBase.render(entityIn, limbSwing, limbSwingAmount * CrystalModifier.getSpeed()[0], ageInTicks * CrystalModifier.getSpeed()[1], netHeadYaw, headPitch, scale);
     }
 

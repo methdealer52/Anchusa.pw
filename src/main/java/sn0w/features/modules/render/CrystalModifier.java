@@ -20,7 +20,7 @@ public class CrystalModifier extends Module
     }
 
     public static float[] getSpeed() {
-        return OyVey.moduleManager.isModuleEnabled("CrystalModifier") ? new float[] { CrystalModifier.spin.getValue(), CrystalModifier.bounce.getValue() } : new float[] { 1.0f, 1.0f };
+        return OyVey.moduleManager.isModuleEnabled("CrystalModifier") ? new float[] { CrystalModifier.spin.getValue(true), CrystalModifier.bounce.getValue(true) } : new float[] { 1.0f, 1.0f };
     }
 
     static {

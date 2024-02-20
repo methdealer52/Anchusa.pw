@@ -45,7 +45,7 @@ public class EventManager extends Feature {
         if (!fullNullCheck() && (event.getEntity().getEntityWorld()).isRemote && event.getEntityLiving().equals(mc.player)) {
             OyVey.inventoryManager.update();
             OyVey.moduleManager.onUpdate();
-            if ((HUD.getInstance()).renderingMode.getValue() == HUD.RenderingMode.Length) {
+            if ((HUD.getInstance()).renderingMode.getValue(true) == HUD.RenderingMode.Length) {
                 OyVey.moduleManager.sortModules(true);
             } else {
                 OyVey.moduleManager.sortModulesABC();
