@@ -13,6 +13,7 @@ import sn0w.features.modules.Module;
 import sn0w.features.modules.client.ClickGui;
 import sn0w.features.modules.client.FontMod;
 import sn0w.features.modules.client.HUD;
+import sn0w.features.modules.combat.Burrow;
 import sn0w.features.modules.exploit.Clip;
 import sn0w.features.modules.movement.NoAcceleration;
 import sn0w.features.modules.player.ChestSwap;
@@ -46,6 +47,7 @@ public class ModuleManager
         this.modules.add(new SilentXP());
         this.modules.add(new CrystalModifier());
         this.modules.add(new NoAcceleration());
+        this.modules.add(new Burrow());
     }
 
     public Module getModuleByName(String name) {
