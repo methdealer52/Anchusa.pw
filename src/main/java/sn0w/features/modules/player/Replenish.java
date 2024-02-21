@@ -36,7 +36,7 @@ public class Replenish extends Module {
     }
 
     @Override
-    public void onUpdate() {
+    public int onUpdate() {
         if (mc.currentScreen != null) return 0;
         if (!this.timer.passedMs(this.delay.getValue(true) * 1000)) return 0;
         for (int i = 0; i < 9; ++i) {

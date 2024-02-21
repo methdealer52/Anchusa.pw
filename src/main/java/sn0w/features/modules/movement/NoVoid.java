@@ -10,7 +10,7 @@ public class NoVoid extends Module {
     }
 
     @Override
-    public void onUpdate() {
+    public int onUpdate() {
         if (fullNullCheck()) return 0;
         if (!mc.player.noClip && mc.player.posY <= 0.0) {
             RayTraceResult trace = mc.world.rayTraceBlocks(mc.player.getPositionVector(), new Vec3d(mc.player.posX, 0.0, mc.player.posZ), false, false, false);

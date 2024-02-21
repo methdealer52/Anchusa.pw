@@ -10,7 +10,7 @@ public class FastPlace extends Module {
     }
 
     @Override
-    public void onUpdate() {
+    public int onUpdate() {
         if (fullNullCheck()) return 0;
         if (InventoryUtil.holdingItem(ItemExpBottle.class)) mc.rightClickDelayTimer = 0;
         return 0;

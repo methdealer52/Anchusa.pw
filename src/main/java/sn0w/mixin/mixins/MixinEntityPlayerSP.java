@@ -1,27 +1,24 @@
 package sn0w.mixin.mixins;
 
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.entity.MoverType;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sn0w.event.events.ChatEvent;
-import sn0w.event.events.MoveEvent;
-import sn0w.event.events.UpdateWalkingPlayerEvent;
+import org.spongepowered.asm.mixin.*;
+import net.minecraft.client.entity.*;
+import net.minecraft.client.*;
+import net.minecraft.world.*;
+import net.minecraft.client.network.*;
+import net.minecraft.stats.*;
+import org.spongepowered.asm.mixin.injection.callback.*;
+import net.minecraftforge.common.*;
+import net.minecraftforge.fml.common.eventhandler.*;
+import net.minecraft.entity.*;
+import sn0w.event.events.*;
+import org.spongepowered.asm.mixin.injection.*;
 import sn0w.features.modules.movement.NoAcceleration;
 
 @Mixin(value = { EntityPlayerSP.class }, priority = 9998)
 public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
     private final NoAcceleration noAcceleration = new NoAcceleration();
 
-    public MixinEntityPlayerSP(final World p_i47378_2_, final NetHandlerPlayClient p_i47378_3_) {
+    public MixinEntityPlayerSP(final Minecraft p_i47378_1_, final World p_i47378_2_, final NetHandlerPlayClient p_i47378_3_, final StatisticsManager p_i47378_4_, final RecipeBook p_i47378_5_) {
         super(p_i47378_2_, p_i47378_3_.getGameProfile());
     }
 

@@ -31,7 +31,7 @@ public class PearlNotify extends Module {
     }
 
     @Override
-    public void onUpdate() {
+    public int onUpdate() {
         if (PearlNotify.mc.world == null || PearlNotify.mc.player == null) {
             return 0;
         }

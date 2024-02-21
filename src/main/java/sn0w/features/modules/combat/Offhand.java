@@ -75,7 +75,7 @@ public class Offhand
     }
 
     @Override
-    public void onUpdate() {
+    public int onUpdate() {
         if (this.timer.passedMs(50L)) {
             if (Offhand.mc.player != null && Offhand.mc.player.getHeldItemOffhand().getItem() == Items.GOLDEN_APPLE && Offhand.mc.player.getHeldItemMainhand().getItem() == Items.END_CRYSTAL && Mouse.isButtonDown(1)) {
                 Offhand.mc.player.setActiveHand(EnumHand.OFF_HAND);

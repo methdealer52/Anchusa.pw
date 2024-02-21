@@ -34,7 +34,7 @@ public class TimerSpeed
     }
 
     @Override
-    public void onUpdate() {
+    public int onUpdate() {
         if (this.autoOff.getValue(true).booleanValue() && this.turnOffTimer.passedMs(this.timeLimit.getValue(true).intValue())) {
             this.disable();
             return 0;

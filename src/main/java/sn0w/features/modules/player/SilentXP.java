@@ -29,7 +29,7 @@ public class SilentXP extends Module
         this.groundOnly = (Setting<Boolean>)this.register(new Setting("BelowHorizon", false));
     }
 
-    public void onUpdate() {
+    public int onUpdate() {
         if (fullNullCheck()) {
             return 0;
         }
