@@ -4,6 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import sn0w.OyVey;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -31,6 +32,7 @@ import net.minecraft.network.play.client.CPacketUseEntity;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.MovementInput;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -81,12 +83,46 @@ public class EntityUtil
         return new Vec3d((entity.posX - entity.lastTickPosX) * x, (entity.posY - entity.lastTickPosY) * y, (entity.posZ - entity.lastTickPosZ) * z);
     }
 
+    public static boolean isInLiquid() {
+        return EntityUtil.mc.player.isInWater() || EntityUtil.mc.player.isInLava();
+    }
+
     public static Vec3d getInterpolatedAmount(Entity entity, Vec3d vec) {
         return EntityUtil.getInterpolatedAmount(entity, vec.x, vec.y, vec.z);
     }
 
     public static Vec3d getInterpolatedAmount(Entity entity, float partialTicks) {
         return EntityUtil.getInterpolatedAmount(entity, partialTicks, partialTicks, partialTicks);
+    }
+
+    public static boolean isOnLiquid(final boolean offset) {
+        if (mc.player.fallDistance >= 3.0f) {
+            return false;
+        }
+        final double yOffset = offset ? 0.5 : 0.0; // Adjust the y-offset based on the boolean condition
+        final AxisAlignedBB bb = (mc.player.getRidingEntity() != null) ? mc.player.getRidingEntity().getEntityBoundingBox().contract(0.0, 0.0, 0.0).offset(0.0, yOffset, 0.0) : mc.player.getEntityBoundingBox().contract(0.0, 0.0, 0.0).offset(0.0, yOffset, 0.0);
+        boolean onLiquid = false;
+        final int y = (int) bb.minY;
+        for (int x = MathHelper.floor(bb.minX); x < MathHelper.floor(bb.maxX + 1.0); ++x) {
+            for (int z = MathHelper.floor(bb.minZ); z < MathHelper.floor(bb.maxZ + 1.0); ++z) {
+                final Block block = mc.world.getBlockState(new BlockPos(x, y, z)).getBlock();
+                if (block != Blocks.AIR) {
+                    if (!(block instanceof BlockLiquid)) {
+                        return false;
+                    }
+                    onLiquid = true;
+                }
+            }
+        }
+        return onLiquid;
+    }
+
+    public static void setTimer(float speed) {
+        Minecraft.getMinecraft().timer.tickLength = 50.0f / speed;
+    }
+
+    public static void resetTimer() {
+        Minecraft.getMinecraft().timer.tickLength = 50;
     }
 
     public static boolean isPassive(Entity entity) {
@@ -650,4 +686,3 @@ public class EntityUtil
         return entity.posY >= (double) blockPos.getY();
     }
 }
-
