@@ -64,7 +64,7 @@ public class KillEffects extends Module
         this.playersDead.clear();
     }
 
-    public int onUpdate() {
+    public void onUpdate() {
         if (KillEffects.mc.world == null) {
             this.playersDead.clear();
         }

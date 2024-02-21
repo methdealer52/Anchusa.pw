@@ -65,7 +65,7 @@ public class Module
     public void onLogout() {
     }
 
-    public int onUpdate() {
+    public void onUpdate() {
         return 0;
     }
 

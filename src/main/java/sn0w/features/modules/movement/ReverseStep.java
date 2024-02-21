@@ -27,7 +27,7 @@ public class ReverseStep extends Module {
     }
 
     @Override
-    public int onUpdate() {
+    public void onUpdate() {
         if (fullNullCheck()) return 0;
         IBlockState touchingState = mc.world.getBlockState(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ).down(2));
         IBlockState touchingState2 = mc.world.getBlockState(new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ).down(3));

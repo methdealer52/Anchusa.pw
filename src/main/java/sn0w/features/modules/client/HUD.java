@@ -69,7 +69,7 @@ public class HUD extends Module {
         INSTANCE = this;
     }
 
-    public int onUpdate() {
+    public void onUpdate() {
         if (this.shouldIncrement)
             this.hitMarkerTimer++;
         if (this.hitMarkerTimer == 10) {

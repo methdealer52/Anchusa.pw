@@ -49,7 +49,7 @@ public class ClickGui
     }
 
     @Override
-    public int onUpdate() {
+    public void onUpdate() {
         if (this.customFov.getValue(true).booleanValue()) {
             ClickGui.mc.gameSettings.setOptionFloatValue(GameSettings.Options.FOV, this.fov.getValue(true).floatValue());
         }

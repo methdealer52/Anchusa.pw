@@ -46,7 +46,7 @@ public class AutoGG
     }
 
     @Override
-    public int onUpdate() {
+    public void onUpdate() {
         if (AutoGG.nullCheck()) {
             return 0;
         }

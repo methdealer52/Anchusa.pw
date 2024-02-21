@@ -44,9 +44,8 @@ public class NoAcceleration extends Module {
     }
 
     @Override
-    public int onUpdate() {
+    public void onUpdate() {
         this.currentMode = modeSetting.getValue(true);
-        return 0;
     }
 
     @Override

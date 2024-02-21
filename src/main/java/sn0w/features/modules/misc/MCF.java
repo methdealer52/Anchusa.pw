@@ -18,7 +18,7 @@ public class MCF
     }
 
     @Override
-    public int onUpdate() {
+    public void onUpdate() {
         if (Mouse.isButtonDown(2)) {
             if (!this.clicked && MCF.mc.currentScreen == null) {
                 this.onClick();

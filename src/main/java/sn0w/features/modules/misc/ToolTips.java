@@ -73,7 +73,7 @@ public class ToolTips
     }
 
     @Override
-    public int onUpdate() {
+    public void onUpdate() {
         if (ToolTips.fullNullCheck()) {
             return 0;
         }

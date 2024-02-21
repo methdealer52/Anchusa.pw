@@ -50,7 +50,7 @@ public class AutoMinecart
     }
 
     @Override
-    public int onUpdate() {
+    public void onUpdate() {
         EntityPlayer target;
         if (AutoMinecart.fullNullCheck()) {
             this.toggle();
