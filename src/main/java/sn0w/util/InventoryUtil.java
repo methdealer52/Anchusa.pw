@@ -377,6 +377,9 @@ public class InventoryUtil
         return slot;
     }
 
+    public static List<Integer> getItemInventory(Item tippedArrow) {
+    return null;}
+
     public enum Switch {
         NORMAL,
         SILENT,
