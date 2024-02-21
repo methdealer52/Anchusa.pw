@@ -43,5 +43,9 @@ public class ColorUtil {
     public static int toRGBA(Color color) {
         return ColorUtil.toRGBA(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
+
+    public static Object injectAlpha(Color color, int boxAlpha) {
+        return null;
+    }
 }
 

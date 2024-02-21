@@ -13,6 +13,10 @@ public class ColorManager {
     private float alpha = 1.0f;
     private Color color = new Color(this.red, this.green, this.blue, this.alpha);
 
+    public static Color getRainbow() {
+        return null;
+    }
+
     public Color getColor() {
         return this.color;
     }

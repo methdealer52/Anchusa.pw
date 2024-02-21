@@ -927,6 +927,15 @@ public class RenderUtil
         EXTFramebufferObject.glFramebufferRenderbufferEXT(36160, 36096, 36161, stencilDepthBufferID);
     }
 
+    public static void drawBlockWireframe(BlockPos pos, Color color, float lineWidth, boolean flatCross) {
+    }
+
+    public static void drawBox(BlockPos pos, Object o, double height, boolean gradientBox, boolean invertGradientBox, int gradientAlpha) {
+    }
+
+    public static void drawBlockOutline(BlockPos pos, Color color, float lineWidth, boolean air, double lineHeight, boolean gradientOutline, boolean invertGradientOutline, int gradientAlpha, boolean b) {
+    }
+
     public static final class GeometryMasks {
         public static final HashMap FACEMAP = new HashMap();
 
