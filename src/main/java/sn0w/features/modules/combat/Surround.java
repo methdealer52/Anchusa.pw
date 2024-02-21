@@ -51,7 +51,7 @@ public class Surround
         }
         this.lastHotbarSlot = Surround.mc.player.inventory.currentItem;
         this.startPos = EntityUtil.getRoundedBlockPos(Surround.mc.player);
-        if (this.center.getValue(true).booleanValue()) {
+        if (this.center.getValue().booleanValue()) {
             OyVey.positionManager.setPositionPacket((double) this.startPos.getX() + 0.5, this.startPos.getY(), (double) this.startPos.getZ() + 0.5, true, true, true);
         }
         this.retries.clear();
@@ -212,11 +212,11 @@ public class Surround
             this.disable();
             return true;
         }
-        return !this.timer.passedMs(this.delay.getValue(true).intValue());
+        return !this.timer.passedMs(this.delay.getValue().intValue());
     }
 
     private void placeBlock(BlockPos pos) {
-        if (this.placements < this.blocksPerTick.getValue(true)) {
+        if (this.placements < this.blocksPerTick.getValue()) {
             int originalSlot = Surround.mc.player.inventory.currentItem;
             int obbySlot = InventoryUtil.findHotbarBlock(BlockObsidian.class);
             int eChestSot = InventoryUtil.findHotbarBlock(BlockEnderChest.class);
@@ -226,7 +226,7 @@ public class Surround
             isPlacing = true;
             Surround.mc.player.inventory.currentItem = obbySlot == -1 ? eChestSot : obbySlot;
             Surround.mc.playerController.updateController();
-            this.isSneaking = BlockUtil.placeBlock(pos, this.offHand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, this.rotate.getValue(true), this.noGhost.getValue(true), this.isSneaking);
+            this.isSneaking = BlockUtil.placeBlock(pos, this.offHand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, this.rotate.getValue(), this.noGhost.getValue(), this.isSneaking);
             Surround.mc.player.inventory.currentItem = originalSlot;
             Surround.mc.playerController.updateController();
             this.didPlace = true;

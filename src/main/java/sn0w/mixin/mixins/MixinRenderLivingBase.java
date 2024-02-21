@@ -104,10 +104,10 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                     if (flag1)
                         unsetScoreTeamColor();
                 } else {
-                    if (Wireframe.getINSTANCE().isOn() && (Wireframe.getINSTANCE()).players.getValue(true).booleanValue() && entity instanceof EntityPlayer && (Wireframe.getINSTANCE()).mode.getValue(true).equals(Wireframe.RenderMode.SOLID)) {
-                        this.red = (ClickGui.getInstance()).red.getValue(true).intValue() / 255.0F;
-                        this.green = (ClickGui.getInstance()).green.getValue(true).intValue() / 255.0F;
-                        this.blue = (ClickGui.getInstance()).blue.getValue(true).intValue() / 255.0F;
+                    if (Wireframe.getINSTANCE().isOn() && (Wireframe.getINSTANCE()).players.getValue().booleanValue() && entity instanceof EntityPlayer && (Wireframe.getINSTANCE()).mode.getValue().equals(Wireframe.RenderMode.SOLID)) {
+                        this.red = (ClickGui.getInstance()).red.getValue().intValue() / 255.0F;
+                        this.green = (ClickGui.getInstance()).green.getValue().intValue() / 255.0F;
+                        this.blue = (ClickGui.getInstance()).blue.getValue().intValue() / 255.0F;
                         GlStateManager.pushMatrix();
                         GL11.glPushAttrib(1048575);
                         GL11.glDisable(3553);
@@ -118,18 +118,18 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                         GL11.glDisable(2929);
                         GL11.glDepthMask(false);
                         if (OyVey.friendManager.isFriend(entity.getName()) || entity == (Minecraft.getMinecraft()).player) {
-                            GL11.glColor4f(0.0F, 191.0F, 255.0F, (Wireframe.getINSTANCE()).alpha.getValue(true).floatValue() / 255.0F);
+                            GL11.glColor4f(0.0F, 191.0F, 255.0F, (Wireframe.getINSTANCE()).alpha.getValue().floatValue() / 255.0F);
                         } else {
-                            GL11.glColor4f((ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getRed() / 255.0F) : this.red, (ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getGreen() / 255.0F) : this.green, (ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getBlue() / 255.0F) : this.blue, (Wireframe.getINSTANCE()).alpha.getValue(true).floatValue() / 255.0F);
+                            GL11.glColor4f((ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRed() / 255.0F) : this.red, (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getGreen() / 255.0F) : this.green, (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getBlue() / 255.0F) : this.blue, (Wireframe.getINSTANCE()).alpha.getValue().floatValue() / 255.0F);
                         }
                         renderModel(entity, f6, f5, f8, f2, f7, f4);
                         GL11.glDisable(2896);
                         GL11.glEnable(2929);
                         GL11.glDepthMask(true);
                         if (OyVey.friendManager.isFriend(entity.getName()) || entity == (Minecraft.getMinecraft()).player) {
-                            GL11.glColor4f(0.0F, 191.0F, 255.0F, (Wireframe.getINSTANCE()).alpha.getValue(true).floatValue() / 255.0F);
+                            GL11.glColor4f(0.0F, 191.0F, 255.0F, (Wireframe.getINSTANCE()).alpha.getValue().floatValue() / 255.0F);
                         } else {
-                            GL11.glColor4f((ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getRed() / 255.0F) : this.red, (ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getGreen() / 255.0F) : this.green, (ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getBlue() / 255.0F) : this.blue, (Wireframe.getINSTANCE()).alpha.getValue(true).floatValue() / 255.0F);
+                            GL11.glColor4f((ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRed() / 255.0F) : this.red, (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getGreen() / 255.0F) : this.green, (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getBlue() / 255.0F) : this.blue, (Wireframe.getINSTANCE()).alpha.getValue().floatValue() / 255.0F);
                         }
                         renderModel(entity, f6, f5, f8, f2, f7, f4);
                         GL11.glEnable(2896);
@@ -137,17 +137,17 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                         GlStateManager.popMatrix();
                     }
                     boolean flag1 = setDoRenderBrightness(entity, partialTicks);
-                    if (!(entity instanceof EntityPlayer) || (Wireframe.getINSTANCE().isOn() && (Wireframe.getINSTANCE()).mode.getValue(true).equals(Wireframe.RenderMode.WIREFRAME) && (Wireframe.getINSTANCE()).playerModel.getValue(true).booleanValue()) || Wireframe.getINSTANCE().isOff())
+                    if (!(entity instanceof EntityPlayer) || (Wireframe.getINSTANCE().isOn() && (Wireframe.getINSTANCE()).mode.getValue().equals(Wireframe.RenderMode.WIREFRAME) && (Wireframe.getINSTANCE()).playerModel.getValue().booleanValue()) || Wireframe.getINSTANCE().isOff())
                         renderModel(entity, f6, f5, f8, f2, f7, f4);
                     if (flag1)
                         unsetBrightness();
                     GlStateManager.depthMask(true);
                     if (!(entity instanceof EntityPlayer) || !((EntityPlayer) entity).isSpectator())
                         renderLayers(entity, f6, f5, partialTicks, f8, f2, f7, f4);
-                    if (Wireframe.getINSTANCE().isOn() && (Wireframe.getINSTANCE()).players.getValue(true).booleanValue() && entity instanceof EntityPlayer && (Wireframe.getINSTANCE()).mode.getValue(true).equals(Wireframe.RenderMode.WIREFRAME)) {
-                        this.red = (ClickGui.getInstance()).red.getValue(true).intValue() / 255.0F;
-                        this.green = (ClickGui.getInstance()).green.getValue(true).intValue() / 255.0F;
-                        this.blue = (ClickGui.getInstance()).blue.getValue(true).intValue() / 255.0F;
+                    if (Wireframe.getINSTANCE().isOn() && (Wireframe.getINSTANCE()).players.getValue().booleanValue() && entity instanceof EntityPlayer && (Wireframe.getINSTANCE()).mode.getValue().equals(Wireframe.RenderMode.WIREFRAME)) {
+                        this.red = (ClickGui.getInstance()).red.getValue().intValue() / 255.0F;
+                        this.green = (ClickGui.getInstance()).green.getValue().intValue() / 255.0F;
+                        this.blue = (ClickGui.getInstance()).blue.getValue().intValue() / 255.0F;
                         GlStateManager.pushMatrix();
                         GL11.glPushAttrib(1048575);
                         GL11.glPolygonMode(1032, 6913);
@@ -158,11 +158,11 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                         GL11.glEnable(3042);
                         GL11.glBlendFunc(770, 771);
                         if (OyVey.friendManager.isFriend(entity.getName()) || entity == (Minecraft.getMinecraft()).player) {
-                            GL11.glColor4f(0.0F, 191.0F, 255.0F, (Wireframe.getINSTANCE()).alpha.getValue(true).floatValue() / 255.0F);
+                            GL11.glColor4f(0.0F, 191.0F, 255.0F, (Wireframe.getINSTANCE()).alpha.getValue().floatValue() / 255.0F);
                         } else {
-                            GL11.glColor4f((ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getRed() / 255.0F) : this.red, (ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getGreen() / 255.0F) : this.green, (ClickGui.getInstance()).rainbow.getValue(true).booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue(true).intValue()).getBlue() / 255.0F) : this.blue, (Wireframe.getINSTANCE()).alpha.getValue(true).floatValue() / 255.0F);
+                            GL11.glColor4f((ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getRed() / 255.0F) : this.red, (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getGreen() / 255.0F) : this.green, (ClickGui.getInstance()).rainbow.getValue().booleanValue() ? (ColorUtil.rainbow((ClickGui.getInstance()).rainbowHue.getValue().intValue()).getBlue() / 255.0F) : this.blue, (Wireframe.getINSTANCE()).alpha.getValue().floatValue() / 255.0F);
                         }
-                        GL11.glLineWidth((Wireframe.getINSTANCE()).lineWidth.getValue(true).floatValue());
+                        GL11.glLineWidth((Wireframe.getINSTANCE()).lineWidth.getValue().floatValue());
                         renderModel(entity, f6, f5, f8, f2, f7, f4);
                         GL11.glEnable(2896);
                         GlStateManager.popAttrib();

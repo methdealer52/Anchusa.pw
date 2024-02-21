@@ -87,7 +87,7 @@ public class AutoTrap
     }
 
     private void doStaticTrap() {
-        List<Vec3d> placeTargets = EntityUtil.targets(this.target.getPositionVector(), this.antiScaffold.getValue(true), this.antiStep.getValue(true), false, false, false, this.raytrace.getValue(true));
+        List<Vec3d> placeTargets = EntityUtil.targets(this.target.getPositionVector(), this.antiScaffold.getValue(), this.antiStep.getValue(), false, false, false, this.raytrace.getValue());
         this.placeList(placeTargets);
     }
 
@@ -96,7 +96,7 @@ public class AutoTrap
         list.sort(Comparator.comparingDouble(vec3d -> vec3d.y));
         for (Vec3d vec3d3 : list) {
             BlockPos position = new BlockPos(vec3d3);
-            int placeability = BlockUtil.isPositionPlaceable(position, this.raytrace.getValue(true));
+            int placeability = BlockUtil.isPositionPlaceable(position, this.raytrace.getValue());
             if (placeability == 1 && (this.retries.get(position) == null || this.retries.get(position) < 4)) {
                 this.placeBlock(position);
                 this.retries.put(position, this.retries.get(position) == null ? 1 : this.retries.get(position) + 1);
@@ -138,14 +138,14 @@ public class AutoTrap
         }
         this.isSneaking = EntityUtil.stopSneaking(this.isSneaking);
         this.target = this.getTarget(10.0, true);
-        return this.target == null || !this.timer.passedMs(this.delay.getValue(true).intValue());
+        return this.target == null || !this.timer.passedMs(this.delay.getValue().intValue());
     }
 
     private EntityPlayer getTarget(double range, boolean trapped) {
         EntityPlayer target = null;
         double distance = Math.pow(range, 2.0) + 1.0;
         for (EntityPlayer player : AutoTrap.mc.world.playerEntities) {
-            if (EntityUtil.isntValid(player, range) || trapped && EntityUtil.isTrapped(player, this.antiScaffold.getValue(true), this.antiStep.getValue(true), false, false, false) || OyVey.speedManager.getPlayerSpeed(player) > 10.0)
+            if (EntityUtil.isntValid(player, range) || trapped && EntityUtil.isTrapped(player, this.antiScaffold.getValue(), this.antiStep.getValue(), false, false, false) || OyVey.speedManager.getPlayerSpeed(player) > 10.0)
                 continue;
             if (target == null) {
                 target = player;
@@ -160,7 +160,7 @@ public class AutoTrap
     }
 
     private void placeBlock(BlockPos pos) {
-        if (this.placements < this.blocksPerPlace.getValue(true) && AutoTrap.mc.player.getDistanceSq(pos) <= MathUtil.square(5.0)) {
+        if (this.placements < this.blocksPerPlace.getValue() && AutoTrap.mc.player.getDistanceSq(pos) <= MathUtil.square(5.0)) {
             isPlacing = true;
             int originalSlot = AutoTrap.mc.player.inventory.currentItem;
             int obbySlot = InventoryUtil.findHotbarBlock(BlockObsidian.class);
@@ -177,7 +177,7 @@ public class AutoTrap
             } else {
                 AutoTrap.mc.player.inventory.currentItem = obbySlot == -1 ? eChestSot : obbySlot;
                 AutoTrap.mc.playerController.updateController();
-                this.isSneaking = BlockUtil.placeBlock(pos, EnumHand.MAIN_HAND, this.rotate.getValue(true), true, this.isSneaking);
+                this.isSneaking = BlockUtil.placeBlock(pos, EnumHand.MAIN_HAND, this.rotate.getValue(), true, this.isSneaking);
                 AutoTrap.mc.player.inventory.currentItem = originalSlot;
                 AutoTrap.mc.playerController.updateController();
             }

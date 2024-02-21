@@ -33,42 +33,42 @@ public class Killaura extends Module {
     }
 
     public void onTick() {
-        if (!this.rotate.getValue(true).booleanValue())
+        if (!this.rotate.getValue().booleanValue())
             doKillaura();
     }
 
     @SubscribeEvent
     public void onUpdateWalkingPlayerEvent(UpdateWalkingPlayerEvent event) {
-        if (event.getStage() == 0 && this.rotate.getValue(true).booleanValue())
+        if (event.getStage() == 0 && this.rotate.getValue().booleanValue())
             doKillaura();
     }
 
     private void doKillaura() {
-        if (this.onlySharp.getValue(true).booleanValue() && !EntityUtil.holdingWeapon(mc.player)) {
+        if (this.onlySharp.getValue().booleanValue() && !EntityUtil.holdingWeapon(mc.player)) {
             target = null;
             return;
         }
-        int wait = !this.delay.getValue(true).booleanValue() ? 0 : (int) (DamageUtil.getCooldownByWeapon(mc.player) * (this.tps.getValue(true).booleanValue() ? OyVey.serverManager.getTpsFactor() : 1.0F));
+        int wait = !this.delay.getValue().booleanValue() ? 0 : (int) (DamageUtil.getCooldownByWeapon(mc.player) * (this.tps.getValue().booleanValue() ? OyVey.serverManager.getTpsFactor() : 1.0F));
         if (!this.timer.passedMs(wait))
             return;
         target = getTarget();
         if (target == null)
             return;
-        if (this.rotate.getValue(true).booleanValue())
+        if (this.rotate.getValue().booleanValue())
             OyVey.rotationManager.lookAtEntity(target);
-        EntityUtil.attackEntity(target, this.packet.getValue(true).booleanValue(), true);
+        EntityUtil.attackEntity(target, this.packet.getValue().booleanValue(), true);
         this.timer.reset();
     }
 
     private Entity getTarget() {
         Entity target = null;
-        double distance = this.range.getValue(true).floatValue();
+        double distance = this.range.getValue().floatValue();
         double maxHealth = 36.0D;
         for (Entity entity : mc.world.playerEntities) {
-            if (((!this.players.getValue(true).booleanValue() || !(entity instanceof EntityPlayer)) && (!this.animals.getValue(true).booleanValue() || !EntityUtil.isPassive(entity)) && (!this.mobs.getValue(true).booleanValue() || !EntityUtil.isMobAggressive(entity)) && (!this.vehicles.getValue(true).booleanValue() || !EntityUtil.isVehicle(entity)) && (!this.projectiles.getValue(true).booleanValue() || !EntityUtil.isProjectile(entity))) || (entity instanceof net.minecraft.entity.EntityLivingBase &&
+            if (((!this.players.getValue().booleanValue() || !(entity instanceof EntityPlayer)) && (!this.animals.getValue().booleanValue() || !EntityUtil.isPassive(entity)) && (!this.mobs.getValue().booleanValue() || !EntityUtil.isMobAggressive(entity)) && (!this.vehicles.getValue().booleanValue() || !EntityUtil.isVehicle(entity)) && (!this.projectiles.getValue().booleanValue() || !EntityUtil.isProjectile(entity))) || (entity instanceof net.minecraft.entity.EntityLivingBase &&
                     EntityUtil.isntValid(entity, distance)))
                 continue;
-            if (!mc.player.canEntityBeSeen(entity) && !EntityUtil.canEntityFeetBeSeen(entity) && mc.player.getDistanceSq(entity) > MathUtil.square(this.raytrace.getValue(true).floatValue()))
+            if (!mc.player.canEntityBeSeen(entity) && !EntityUtil.canEntityFeetBeSeen(entity) && mc.player.getDistanceSq(entity) > MathUtil.square(this.raytrace.getValue().floatValue()))
                 continue;
             if (target == null) {
                 target = entity;

@@ -25,7 +25,7 @@ public class SilentXP extends Module
         super("PacketEXP",  "Silent XP.",  Module.Category.PLAYER, true, false, false);
         this.mode = (Setting<Mode>)this.register(new Setting("Mode", Mode.MIDDLECLICK));
         this.antiFriend = (Setting<Boolean>)this.register(new Setting("AntiFriend", true));
-        this.key = (Setting<Bind>)this.register(new Setting("Key", new Bind(-1), v -> this.mode.getValue(true) != Mode.MIDDLECLICK));
+        this.key = (Setting<Bind>)this.register(new Setting("Key", new Bind(-1), v -> this.mode.getValue() != Mode.MIDDLECLICK));
         this.groundOnly = (Setting<Boolean>)this.register(new Setting("BelowHorizon", false));
     }
 
@@ -33,9 +33,9 @@ public class SilentXP extends Module
         if (fullNullCheck()) {
             return 0;
         }
-        switch (this.mode.getValue(true)) {
+        switch (this.mode.getValue()) {
             case PRESS: {
-                if (this.key.getValue(true).isDown()) {
+                if (this.key.getValue().isDown()) {
                     this.throwXP(false);
                     break;
                 }
@@ -49,7 +49,7 @@ public class SilentXP extends Module
                 break;
             }
             default: {
-                if (this.groundOnly.getValue(true) && SilentXP.mc.player.rotationPitch < 0.0f) {
+                if (this.groundOnly.getValue() && SilentXP.mc.player.rotationPitch < 0.0f) {
                     return 0;
                 }
                 if (Mouse.isButtonDown(2)) {
@@ -63,15 +63,15 @@ public class SilentXP extends Module
     }
 
     private boolean toggled() {
-        if (this.key.getValue(true).getKey() == -1) return false;
-        if (!Keyboard.isKeyDown(this.key.getValue(true).getKey())) {
+        if (this.key.getValue().getKey() == -1) return false;
+        if (!Keyboard.isKeyDown(this.key.getValue().getKey())) {
             this.last = true;
         } else {
-            if (Keyboard.isKeyDown(this.key.getValue(true).getKey()) && this.last && !this.on) {
+            if (Keyboard.isKeyDown(this.key.getValue().getKey()) && this.last && !this.on) {
                 this.last = false;
                 return this.on = true;
             }
-            if (Keyboard.isKeyDown(this.key.getValue(true).getKey()) && this.last && this.on) {
+            if (Keyboard.isKeyDown(this.key.getValue().getKey()) && this.last && this.on) {
                 this.last = false;
                 return this.on = false;
             }
@@ -81,7 +81,7 @@ public class SilentXP extends Module
 
     private void throwXP(final boolean mcf) {
         final RayTraceResult result;
-        if (mcf && this.antiFriend.getValue(true) && (result = SilentXP.mc.objectMouseOver) != null && result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit instanceof EntityPlayer) return;
+        if (mcf && this.antiFriend.getValue() && (result = SilentXP.mc.objectMouseOver) != null && result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit instanceof EntityPlayer) return;
         final int xpSlot = InventoryUtil.findHotbarBlock(ItemExpBottle.class);
         final boolean offhand = SilentXP.mc.player.getHeldItemOffhand().getItem() == Items.EXPERIENCE_BOTTLE;
         if (xpSlot != -1 || offhand) {

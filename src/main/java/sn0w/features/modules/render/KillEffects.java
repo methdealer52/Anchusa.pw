@@ -77,13 +77,13 @@ public class KillEffects extends Module
                 }
             }
             else if (entity.getHealth() == 0.0f) {
-                if (this.thunder.getValue(true)) {
-                    for (i.set(0); i.get() < (int)this.numbersThunder.getValue(true); i.incrementAndGet()) {
+                if (this.thunder.getValue()) {
+                    for (i.set(0); i.get() < (int)this.numbersThunder.getValue(); i.incrementAndGet()) {
                         KillEffects.mc.world.spawnEntity((Entity)new EntityLightningBolt((World)KillEffects.mc.world, entity.posX, entity.posY, entity.posZ, true));
                     }
                 }
-                if (this.sound.getValue(true)) {
-                    for (j.set(0); j.get() < (int)this.numberSound.getValue(true); j.incrementAndGet()) {
+                if (this.sound.getValue()) {
+                    for (j.set(0); j.get() < (int)this.numberSound.getValue(); j.incrementAndGet()) {
                         KillEffects.mc.player.playSound(SoundEvents.ENTITY_LIGHTNING_THUNDER, 0.5f, 1.0f);
                     }
                 }
@@ -99,36 +99,36 @@ public class KillEffects extends Module
             return;
         }
         if (this.shouldRenderParticle(event.getEntity())) {
-            if (this.lightning.getValue(true)) {
+            if (this.lightning.getValue()) {
                 KillEffects.mc.world.addEntityToWorld(-999, (Entity)new EntityLightningBolt((World)KillEffects.mc.world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, true));
             }
-            if (this.totemPop.getValue(true)) {
+            if (this.totemPop.getValue()) {
                 this.totemPop(event.getEntity());
             }
-            if (this.firework.getValue(true)) {
-                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.FIREWORKS_SPARK, (int)this.timeActive.getValue(true));
+            if (this.firework.getValue()) {
+                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.FIREWORKS_SPARK, (int)this.timeActive.getValue());
             }
-            if (this.fire.getValue(true)) {
-                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.FLAME, (int)this.timeActive.getValue(true));
-                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.DRIP_LAVA, (int)this.timeActive.getValue(true));
+            if (this.fire.getValue()) {
+                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.FLAME, (int)this.timeActive.getValue());
+                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.DRIP_LAVA, (int)this.timeActive.getValue());
             }
-            if (this.water.getValue(true)) {
-                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.WATER_BUBBLE, (int)this.timeActive.getValue(true));
-                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.WATER_DROP, (int)this.timeActive.getValue(true));
+            if (this.water.getValue()) {
+                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.WATER_BUBBLE, (int)this.timeActive.getValue());
+                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.WATER_DROP, (int)this.timeActive.getValue());
             }
-            if (this.smoke.getValue(true)) {
-                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.SMOKE_NORMAL, (int)this.timeActive.getValue(true));
+            if (this.smoke.getValue()) {
+                KillEffects.mc.effectRenderer.emitParticleAtEntity(event.getEntity(), EnumParticleTypes.SMOKE_NORMAL, (int)this.timeActive.getValue());
             }
         }
     }
 
     public boolean shouldRenderParticle(final Entity entity) {
-        return entity != KillEffects.mc.player && ((boolean)this.all.getValue(true) || (entity instanceof EntityPlayer && (boolean)this.players.getValue(true)) || entity instanceof EntityMob || (entity instanceof EntitySlime && (boolean)this.mobs.getValue(true)) || (entity instanceof EntityAnimal && (boolean)this.animals.getValue(true)));
+        return entity != KillEffects.mc.player && ((boolean)this.all.getValue() || (entity instanceof EntityPlayer && (boolean)this.players.getValue()) || entity instanceof EntityMob || (entity instanceof EntitySlime && (boolean)this.mobs.getValue()) || (entity instanceof EntityAnimal && (boolean)this.animals.getValue()));
     }
 
     public void totemPop(final Entity entity) {
-        KillEffects.mc.effectRenderer.emitParticleAtEntity(entity, EnumParticleTypes.TOTEM, (int)this.timeActive.getValue(true));
-        if (this.totemPopSound.getValue(true)) {
+        KillEffects.mc.effectRenderer.emitParticleAtEntity(entity, EnumParticleTypes.TOTEM, (int)this.timeActive.getValue());
+        if (this.totemPopSound.getValue()) {
             KillEffects.mc.world.playSound(entity.posX, entity.posY, entity.posZ, SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0f, 1.0f, false);
         }
     }

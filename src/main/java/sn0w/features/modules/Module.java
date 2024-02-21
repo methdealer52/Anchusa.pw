@@ -83,11 +83,11 @@ public class Module
     }
 
     public boolean isOn() {
-        return this.enabled.getValue(true);
+        return this.enabled.getValue();
     }
 
     public boolean isOff() {
-        return this.enabled.getValue(true) == false;
+        return this.enabled.getValue() == false;
     }
 
     public void setEnabled(boolean enabled) {
@@ -102,7 +102,7 @@ public class Module
         this.enabled.setValue(Boolean.TRUE);
         this.onToggle();
         this.onEnable();
-        if (HUD.getInstance().notifyToggles.getValue(true).booleanValue()) {
+        if (HUD.getInstance().notifyToggles.getValue().booleanValue()) {
             TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + " " + ChatFormatting.BOLD + this.getDisplayName() + ChatFormatting.WHITE + " was" + ChatFormatting.AQUA + " enabled!");
             Module.mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(text, 1);
         }
@@ -116,7 +116,7 @@ public class Module
             MinecraftForge.EVENT_BUS.unregister(this);
         }
         this.enabled.setValue(false);
-        if (HUD.getInstance().notifyToggles.getValue(true).booleanValue()) {
+        if (HUD.getInstance().notifyToggles.getValue().booleanValue()) {
             TextComponentString text = new TextComponentString(OyVey.commandManager.getClientMessage() + " " + ChatFormatting.BOLD + this.getDisplayName() + ChatFormatting.WHITE + " was" + ChatFormatting.BLUE + " disabled!");
             Module.mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(text, 1);
         }
@@ -133,7 +133,7 @@ public class Module
     }
 
     public String getDisplayName() {
-        return this.displayName.getValue(true);
+        return this.displayName.getValue();
     }
 
     public void setDisplayName(String name) {
@@ -152,7 +152,7 @@ public class Module
     }
 
     public boolean isDrawn() {
-        return this.drawn.getValue(true);
+        return this.drawn.getValue();
     }
 
     public void setDrawn(boolean drawn) {
@@ -168,7 +168,7 @@ public class Module
     }
 
     public Bind getBind() {
-        return this.bind.getValue(true);
+        return this.bind.getValue();
     }
 
     public void setBind(int key) {

@@ -20,8 +20,8 @@ public class AutoArmor
     private final Setting<Integer> delay = this.register(new Setting<Integer>("Delay", 50, 0, 500));
     private final Setting<Boolean> curse = this.register(new Setting<Boolean>("Vanishing", false));
     private final Setting<Boolean> mendingTakeOff = this.register(new Setting<Boolean>("AutoMend", false));
-    private final Setting<Integer> closestEnemy = this.register(new Setting<Object>("Enemy", Integer.valueOf(8), Integer.valueOf(1), Integer.valueOf(20), v -> this.mendingTakeOff.getValue(true)));
-    private final Setting<Integer> repair = this.register(new Setting<Object>("Repair%", Integer.valueOf(80), Integer.valueOf(1), Integer.valueOf(100), v -> this.mendingTakeOff.getValue(true)));
+    private final Setting<Integer> closestEnemy = this.register(new Setting<Object>("Enemy", Integer.valueOf(8), Integer.valueOf(1), Integer.valueOf(20), v -> this.mendingTakeOff.getValue()));
+    private final Setting<Integer> repair = this.register(new Setting<Object>("Repair%", Integer.valueOf(80), Integer.valueOf(1), Integer.valueOf(100), v -> this.mendingTakeOff.getValue()));
     private final Setting<Integer> actions = this.register(new Setting<Integer>("Packets", 3, 1, 12));
     private final Timer timer = new Timer();
     private final Queue<InventoryUtil.Task> taskList = new ConcurrentLinkedQueue<InventoryUtil.Task>();
@@ -63,13 +63,13 @@ public class AutoArmor
             int slot3;
             ItemStack chest;
             int slot4;
-            if (this.mendingTakeOff.getValue(true).booleanValue() && InventoryUtil.holdingItem(ItemExpBottle.class) && AutoArmor.mc.gameSettings.keyBindUseItem.isKeyDown() && AutoArmor.mc.world.playerEntities.stream().noneMatch(e -> e != AutoArmor.mc.player && !OyVey.friendManager.isFriend(e.getName()) && AutoArmor.mc.player.getDistance(e) <= (float) this.closestEnemy.getValue(true).intValue()) && !this.flag) {
+            if (this.mendingTakeOff.getValue().booleanValue() && InventoryUtil.holdingItem(ItemExpBottle.class) && AutoArmor.mc.gameSettings.keyBindUseItem.isKeyDown() && AutoArmor.mc.world.playerEntities.stream().noneMatch(e -> e != AutoArmor.mc.player && !OyVey.friendManager.isFriend(e.getName()) && AutoArmor.mc.player.getDistance(e) <= (float) this.closestEnemy.getValue().intValue()) && !this.flag) {
                 int goods;
                 int dam;
                 int takeOff = 0;
                 for (Map.Entry<Integer, ItemStack> armorSlot : this.getArmor().entrySet()) {
                     ItemStack stack = armorSlot.getValue();
-                    float percent = (float) this.repair.getValue(true).intValue() / 100.0f;
+                    float percent = (float) this.repair.getValue().intValue() / 100.0f;
                     dam = Math.round((float) stack.getMaxDamage() * percent);
                     if (dam >= (goods = stack.getMaxDamage() - stack.getItemDamage())) continue;
                     ++takeOff;
@@ -81,7 +81,7 @@ public class AutoArmor
                     ItemStack itemStack1 = AutoArmor.mc.player.inventoryContainer.getSlot(5).getStack();
                     if (!itemStack1.isEmpty) {
                         int goods2;
-                        float percent = (float) this.repair.getValue(true).intValue() / 100.0f;
+                        float percent = (float) this.repair.getValue().intValue() / 100.0f;
                         int dam2 = Math.round((float) itemStack1.getMaxDamage() * percent);
                         if (dam2 < (goods2 = itemStack1.getMaxDamage() - itemStack1.getItemDamage())) {
                             this.takeOffSlot(5);
@@ -90,7 +90,7 @@ public class AutoArmor
                     ItemStack itemStack2 = AutoArmor.mc.player.inventoryContainer.getSlot(6).getStack();
                     if (!itemStack2.isEmpty) {
                         int goods3;
-                        float percent = (float) this.repair.getValue(true).intValue() / 100.0f;
+                        float percent = (float) this.repair.getValue().intValue() / 100.0f;
                         int dam3 = Math.round((float) itemStack2.getMaxDamage() * percent);
                         if (dam3 < (goods3 = itemStack2.getMaxDamage() - itemStack2.getItemDamage())) {
                             this.takeOffSlot(6);
@@ -98,7 +98,7 @@ public class AutoArmor
                     }
                     ItemStack itemStack3 = AutoArmor.mc.player.inventoryContainer.getSlot(7).getStack();
                     if (!itemStack3.isEmpty) {
-                        float percent = (float) this.repair.getValue(true).intValue() / 100.0f;
+                        float percent = (float) this.repair.getValue().intValue() / 100.0f;
                         dam = Math.round((float) itemStack3.getMaxDamage() * percent);
                         if (dam < (goods = itemStack3.getMaxDamage() - itemStack3.getItemDamage())) {
                             this.takeOffSlot(7);
@@ -107,7 +107,7 @@ public class AutoArmor
                     ItemStack itemStack4 = AutoArmor.mc.player.inventoryContainer.getSlot(8).getStack();
                     if (!itemStack4.isEmpty) {
                         int goods4;
-                        float percent = (float) this.repair.getValue(true).intValue() / 100.0f;
+                        float percent = (float) this.repair.getValue().intValue() / 100.0f;
                         int dam4 = Math.round((float) itemStack4.getMaxDamage() * percent);
                         if (dam4 < (goods4 = itemStack4.getMaxDamage() - itemStack4.getItemDamage())) {
                             this.takeOffSlot(8);
@@ -118,22 +118,22 @@ public class AutoArmor
             }
             this.flag = false;
             ItemStack helm = AutoArmor.mc.player.inventoryContainer.getSlot(5).getStack();
-            if (helm.getItem() == Items.AIR && (slot4 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.HEAD, this.curse.getValue(true), true)) != -1) {
+            if (helm.getItem() == Items.AIR && (slot4 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.HEAD, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(5, slot4);
             }
-            if ((chest = AutoArmor.mc.player.inventoryContainer.getSlot(6).getStack()).getItem() == Items.AIR && (slot3 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.CHEST, this.curse.getValue(true), true)) != -1) {
+            if ((chest = AutoArmor.mc.player.inventoryContainer.getSlot(6).getStack()).getItem() == Items.AIR && (slot3 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.CHEST, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(6, slot3);
             }
-            if ((legging = AutoArmor.mc.player.inventoryContainer.getSlot(7).getStack()).getItem() == Items.AIR && (slot2 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.LEGS, this.curse.getValue(true), true)) != -1) {
+            if ((legging = AutoArmor.mc.player.inventoryContainer.getSlot(7).getStack()).getItem() == Items.AIR && (slot2 = InventoryUtil.findArmorSlot(EntityEquipmentSlot.LEGS, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(7, slot2);
             }
-            if ((feet = AutoArmor.mc.player.inventoryContainer.getSlot(8).getStack()).getItem() == Items.AIR && (slot = InventoryUtil.findArmorSlot(EntityEquipmentSlot.FEET, this.curse.getValue(true), true)) != -1) {
+            if ((feet = AutoArmor.mc.player.inventoryContainer.getSlot(8).getStack()).getItem() == Items.AIR && (slot = InventoryUtil.findArmorSlot(EntityEquipmentSlot.FEET, this.curse.getValue(), true)) != -1) {
                 this.getSlotOn(8, slot);
             }
         }
-        if (this.timer.passedMs((int) ((float) this.delay.getValue(true).intValue() * OyVey.serverManager.getTpsFactor()))) {
+        if (this.timer.passedMs((int) ((float) this.delay.getValue().intValue() * OyVey.serverManager.getTpsFactor()))) {
             if (!this.taskList.isEmpty()) {
-                for (int i = 0; i < this.actions.getValue(true); ++i) {
+                for (int i = 0; i < this.actions.getValue(); ++i) {
                     InventoryUtil.Task task = this.taskList.poll();
                     if (task == null) continue;
                     task.run();

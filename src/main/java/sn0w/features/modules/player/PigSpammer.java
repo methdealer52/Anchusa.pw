@@ -35,7 +35,7 @@ public class PigSpammer extends Module {
 
     @Override
     public int onUpdate() {
-        if (timer.passedS(delay.getValue(true))) {
+        if (timer.passedS(delay.getValue())) {
             Random random = new Random();
             mc.player.sendChatMessage(messages[(random.nextInt(messages.length))]);
             timer.reset();

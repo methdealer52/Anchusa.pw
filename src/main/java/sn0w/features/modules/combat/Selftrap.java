@@ -46,14 +46,14 @@ public class Selftrap
 
     @Override
     public void onTick() {
-        if (this.isOn() && (this.blocksPerTick.getValue(true) != 1 || !this.rotate.getValue(true).booleanValue())) {
+        if (this.isOn() && (this.blocksPerTick.getValue() != 1 || !this.rotate.getValue().booleanValue())) {
             this.doHoleFill();
         }
     }
 
     @SubscribeEvent
     public void onUpdateWalkingPlayer(UpdateWalkingPlayerEvent event) {
-        if (this.isOn() && event.getStage() == 0 && this.blocksPerTick.getValue(true) == 1 && this.rotate.getValue(true).booleanValue()) {
+        if (this.isOn() && event.getStage() == 0 && this.blocksPerTick.getValue() == 1 && this.rotate.getValue().booleanValue()) {
             this.doHoleFill();
         }
     }
@@ -106,8 +106,8 @@ public class Selftrap
     }
 
     private void placeBlock(BlockPos pos) {
-        if (this.blocksThisTick < this.blocksPerTick.getValue(true)) {
-            boolean smartRotate = this.blocksPerTick.getValue(true) == 1 && this.rotate.getValue(true) != false;
+        if (this.blocksThisTick < this.blocksPerTick.getValue()) {
+            boolean smartRotate = this.blocksPerTick.getValue() == 1 && this.rotate.getValue() != false;
             int originalSlot = Selftrap.mc.player.inventory.currentItem;
             int obbySlot = InventoryUtil.findHotbarBlock(BlockObsidian.class);
             int eChestSot = InventoryUtil.findHotbarBlock(BlockEnderChest.class);
@@ -116,7 +116,7 @@ public class Selftrap
             }
             Selftrap.mc.player.inventory.currentItem = obbySlot == -1 ? eChestSot : obbySlot;
             Selftrap.mc.playerController.updateController();
-            this.isSneaking = smartRotate ? BlockUtil.placeBlockSmartRotate(pos, this.hasOffhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, true, this.packet.getValue(true), this.isSneaking) : BlockUtil.placeBlock(pos, this.hasOffhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, this.rotate.getValue(true), this.packet.getValue(true), this.isSneaking);
+            this.isSneaking = smartRotate ? BlockUtil.placeBlockSmartRotate(pos, this.hasOffhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, true, this.packet.getValue(), this.isSneaking) : BlockUtil.placeBlock(pos, this.hasOffhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, this.rotate.getValue(), this.packet.getValue(), this.isSneaking);
             Selftrap.mc.player.inventory.currentItem = originalSlot;
             Selftrap.mc.playerController.updateController();
             this.timer.reset();
@@ -144,11 +144,11 @@ public class Selftrap
             this.offTimer.reset();
             return true;
         }
-        if (this.disable.getValue(true).booleanValue() && this.offTimer.passedMs(this.disableTime.getValue(true).intValue())) {
+        if (this.disable.getValue().booleanValue() && this.offTimer.passedMs(this.disableTime.getValue().intValue())) {
             this.disable();
             return true;
         }
-        return !this.timer.passedMs(this.delay.getValue(true).intValue());
+        return !this.timer.passedMs(this.delay.getValue().intValue());
     }
 }
 

@@ -52,7 +52,7 @@ public class ESP
         AxisAlignedBB bb;
         Vec3d interp;
         int i;
-        if (this.items.getValue(true).booleanValue()) {
+        if (this.items.getValue().booleanValue()) {
             i = 0;
             for (Entity entity : ESP.mc.world.loadedEntityList) {
                 if (!(entity instanceof EntityItem) || !(ESP.mc.player.getDistanceSq(entity) < 2500.0)) continue;
@@ -67,19 +67,19 @@ public class ESP
                 GL11.glEnable(2848);
                 GL11.glHint(3154, 4354);
                 GL11.glLineWidth(1.0f);
-                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue(true).intValue() / 255.0f, (float) this.green.getValue(true).intValue() / 255.0f, (float) this.blue.getValue(true).intValue() / 255.0f, (float) this.boxAlpha.getValue(true).intValue() / 255.0f);
+                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue().intValue() / 255.0f, (float) this.green.getValue().intValue() / 255.0f, (float) this.blue.getValue().intValue() / 255.0f, (float) this.boxAlpha.getValue().intValue() / 255.0f);
                 GL11.glDisable(2848);
                 GlStateManager.depthMask(true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(true), this.green.getValue(true), this.blue.getValue(true), this.alpha.getValue(true)), 1.0f);
+                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
                 if (++i < 50) continue;
                 break;
             }
         }
-        if (this.xporbs.getValue(true).booleanValue()) {
+        if (this.xporbs.getValue().booleanValue()) {
             i = 0;
             for (Entity entity : ESP.mc.world.loadedEntityList) {
                 if (!(entity instanceof EntityXPOrb) || !(ESP.mc.player.getDistanceSq(entity) < 2500.0)) continue;
@@ -94,19 +94,19 @@ public class ESP
                 GL11.glEnable(2848);
                 GL11.glHint(3154, 4354);
                 GL11.glLineWidth(1.0f);
-                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue(true).intValue() / 255.0f, (float) this.green.getValue(true).intValue() / 255.0f, (float) this.blue.getValue(true).intValue() / 255.0f, (float) this.boxAlpha.getValue(true).intValue() / 255.0f);
+                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue().intValue() / 255.0f, (float) this.green.getValue().intValue() / 255.0f, (float) this.blue.getValue().intValue() / 255.0f, (float) this.boxAlpha.getValue().intValue() / 255.0f);
                 GL11.glDisable(2848);
                 GlStateManager.depthMask(true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(true), this.green.getValue(true), this.blue.getValue(true), this.alpha.getValue(true)), 1.0f);
+                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
                 if (++i < 50) continue;
                 break;
             }
         }
-        if (this.pearl.getValue(true).booleanValue()) {
+        if (this.pearl.getValue().booleanValue()) {
             i = 0;
             for (Entity entity : ESP.mc.world.loadedEntityList) {
                 if (!(entity instanceof EntityEnderPearl) || !(ESP.mc.player.getDistanceSq(entity) < 2500.0)) continue;
@@ -121,19 +121,19 @@ public class ESP
                 GL11.glEnable(2848);
                 GL11.glHint(3154, 4354);
                 GL11.glLineWidth(1.0f);
-                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue(true).intValue() / 255.0f, (float) this.green.getValue(true).intValue() / 255.0f, (float) this.blue.getValue(true).intValue() / 255.0f, (float) this.boxAlpha.getValue(true).intValue() / 255.0f);
+                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue().intValue() / 255.0f, (float) this.green.getValue().intValue() / 255.0f, (float) this.blue.getValue().intValue() / 255.0f, (float) this.boxAlpha.getValue().intValue() / 255.0f);
                 GL11.glDisable(2848);
                 GlStateManager.depthMask(true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(true), this.green.getValue(true), this.blue.getValue(true), this.alpha.getValue(true)), 1.0f);
+                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
                 if (++i < 50) continue;
                 break;
             }
         }
-        if (this.xpbottles.getValue(true).booleanValue()) {
+        if (this.xpbottles.getValue().booleanValue()) {
             i = 0;
             for (Entity entity : ESP.mc.world.loadedEntityList) {
                 if (!(entity instanceof EntityExpBottle) || !(ESP.mc.player.getDistanceSq(entity) < 2500.0)) continue;
@@ -148,14 +148,14 @@ public class ESP
                 GL11.glEnable(2848);
                 GL11.glHint(3154, 4354);
                 GL11.glLineWidth(1.0f);
-                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue(true).intValue() / 255.0f, (float) this.green.getValue(true).intValue() / 255.0f, (float) this.blue.getValue(true).intValue() / 255.0f, (float) this.boxAlpha.getValue(true).intValue() / 255.0f);
+                RenderGlobal.renderFilledBox(bb, (float) this.red.getValue().intValue() / 255.0f, (float) this.green.getValue().intValue() / 255.0f, (float) this.blue.getValue().intValue() / 255.0f, (float) this.boxAlpha.getValue().intValue() / 255.0f);
                 GL11.glDisable(2848);
                 GlStateManager.depthMask(true);
                 GlStateManager.enableDepth();
                 GlStateManager.enableTexture2D();
                 GlStateManager.disableBlend();
                 GlStateManager.popMatrix();
-                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(true), this.green.getValue(true), this.blue.getValue(true), this.alpha.getValue(true)), 1.0f);
+                RenderUtil.drawBlockOutline(bb, new Color(this.red.getValue(), this.green.getValue(), this.blue.getValue(), this.alpha.getValue()), 1.0f);
                 if (++i < 50) continue;
                 break;
             }

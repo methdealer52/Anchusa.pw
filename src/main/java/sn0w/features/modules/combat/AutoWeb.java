@@ -89,10 +89,10 @@ public class AutoWeb
     private List<Vec3d> getPlacements() {
         ArrayList<Vec3d> list = new ArrayList<Vec3d>();
         Vec3d baseVec = this.target.getPositionVector();
-        if (this.lowerbody.getValue(true).booleanValue()) {
+        if (this.lowerbody.getValue().booleanValue()) {
             list.add(baseVec);
         }
-        if (this.upperBody.getValue(true).booleanValue()) {
+        if (this.upperBody.getValue().booleanValue()) {
             list.add(baseVec.add(0.0, 1.0, 0.0));
         }
         return list;
@@ -103,7 +103,7 @@ public class AutoWeb
         list.sort(Comparator.comparingDouble(vec3d -> vec3d.y));
         for (Vec3d vec3d3 : list) {
             BlockPos position = new BlockPos(vec3d3);
-            int placeability = BlockUtil.isPositionPlaceable(position, this.raytrace.getValue(true));
+            int placeability = BlockUtil.isPositionPlaceable(position, this.raytrace.getValue());
             if (placeability != 3 && placeability != 1) continue;
             this.placeBlock(position);
         }
@@ -117,7 +117,7 @@ public class AutoWeb
         if (this.isOff()) {
             return true;
         }
-        if (this.disable.getValue(true).booleanValue() && !this.startPos.equals(EntityUtil.getRoundedBlockPos(AutoWeb.mc.player))) {
+        if (this.disable.getValue().booleanValue() && !this.startPos.equals(EntityUtil.getRoundedBlockPos(AutoWeb.mc.player))) {
             this.disable();
             return true;
         }
@@ -132,7 +132,7 @@ public class AutoWeb
         this.switchItem(true);
         this.isSneaking = EntityUtil.stopSneaking(this.isSneaking);
         this.target = this.getTarget(10.0);
-        return this.target == null || !this.timer.passedMs(this.delay.getValue(true).intValue());
+        return this.target == null || !this.timer.passedMs(this.delay.getValue().intValue());
     }
 
     private EntityPlayer getTarget(double range) {
@@ -154,9 +154,9 @@ public class AutoWeb
     }
 
     private void placeBlock(BlockPos pos) {
-        if (this.placements < this.blocksPerPlace.getValue(true) && AutoWeb.mc.player.getDistanceSq(pos) <= MathUtil.square(6.0) && this.switchItem(false)) {
+        if (this.placements < this.blocksPerPlace.getValue() && AutoWeb.mc.player.getDistanceSq(pos) <= MathUtil.square(6.0) && this.switchItem(false)) {
             isPlacing = true;
-            this.isSneaking = this.smartRotate ? BlockUtil.placeBlockSmartRotate(pos, EnumHand.MAIN_HAND, true, this.packet.getValue(true), this.isSneaking) : BlockUtil.placeBlock(pos, EnumHand.MAIN_HAND, this.rotate.getValue(true), this.packet.getValue(true), this.isSneaking);
+            this.isSneaking = this.smartRotate ? BlockUtil.placeBlockSmartRotate(pos, EnumHand.MAIN_HAND, true, this.packet.getValue(), this.isSneaking) : BlockUtil.placeBlock(pos, EnumHand.MAIN_HAND, this.rotate.getValue(), this.packet.getValue(), this.isSneaking);
             this.didPlace = true;
             ++this.placements;
         }

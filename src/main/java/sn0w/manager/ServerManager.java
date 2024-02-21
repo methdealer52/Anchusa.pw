@@ -22,7 +22,7 @@ public class ServerManager
     }
 
     public boolean isServerNotResponding() {
-        return this.timer.passedMs(HUD.getInstance().lagTime.getValue(true).intValue());
+        return this.timer.passedMs(HUD.getInstance().lagTime.getValue().intValue());
     }
 
     public long serverRespondingTime() {

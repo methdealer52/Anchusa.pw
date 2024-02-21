@@ -38,7 +38,7 @@ public class Replenish extends Module {
     @Override
     public int onUpdate() {
         if (mc.currentScreen != null) return 0;
-        if (!this.timer.passedMs(this.delay.getValue(true) * 1000)) return 0;
+        if (!this.timer.passedMs(this.delay.getValue() * 1000)) return 0;
         for (int i = 0; i < 9; ++i) {
             if (!this.RefillSlotIfNeed(i)) continue;
             this.timer.reset();
@@ -52,8 +52,8 @@ public class Replenish extends Module {
         if (stack.isEmpty() || stack.getItem() == Items.AIR) return false;
         if (!stack.isStackable()) return false;
         if (stack.getCount() >= stack.getMaxStackSize()) return false;
-        if (stack.getItem().equals(Items.GOLDEN_APPLE) && stack.getCount() >= this.gapStack.getValue(true)) return false;
-        if (stack.getItem().equals(Items.EXPERIENCE_BOTTLE) && stack.getCount() > this.xpStackAt.getValue(true)) return false;
+        if (stack.getItem().equals(Items.GOLDEN_APPLE) && stack.getCount() >= this.gapStack.getValue()) return false;
+        if (stack.getItem().equals(Items.EXPERIENCE_BOTTLE) && stack.getCount() > this.xpStackAt.getValue()) return false;
         for (int i = 9; i < 36; ++i) {
             ItemStack item = mc.player.inventory.getStackInSlot(i);
             if (item.isEmpty() || !this.CanItemBeMergedWith(stack, item)) continue;
