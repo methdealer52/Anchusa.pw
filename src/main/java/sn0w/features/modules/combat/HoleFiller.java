@@ -91,7 +91,7 @@ public class HoleFiller extends Module {
             return;
         }
         this.holes = new ArrayList<BlockPos>();
-        final Iterable<BlockPos> blocks = BlockPos.getAllInBox(HoleFiller.mc.player.getPosition().add(-this.range.getValue(), -this.range.getValue(), -this.range.getValue()), HoleFiller.mc.player.getPosition().add(this.range.getValue(), this.range.getValue(), this.range.getValue()));
+        final Iterable<BlockPos> blocks = BlockPos.getAllInBox(HoleFiller.mc.player.getPosition().add(-this.range.getValue(true), -this.range.getValue(true), -this.range.getValue(true)), HoleFiller.mc.player.getPosition().add(this.range.getValue(true), this.range.getValue(true), this.range.getValue(true)));
         for (final BlockPos pos : blocks) {
             if (!HoleFiller.mc.world.getBlockState(pos).getMaterial().blocksMovement() && !HoleFiller.mc.world.getBlockState(pos.add(0, 1, 0)).getMaterial().blocksMovement()) {
                 final boolean solidNeighbours = (HoleFiller.mc.world.getBlockState(pos.add(1, 0, 0)).getBlock() == Blocks.BEDROCK | HoleFiller.mc.world.getBlockState(pos.add(1, 0, 0)).getBlock() == Blocks.OBSIDIAN) && (HoleFiller.mc.world.getBlockState(pos.add(0, 0, 1)).getBlock() == Blocks.BEDROCK | HoleFiller.mc.world.getBlockState(pos.add(0, 0, 1)).getBlock() == Blocks.OBSIDIAN) && (HoleFiller.mc.world.getBlockState(pos.add(-1, 0, 0)).getBlock() == Blocks.BEDROCK | HoleFiller.mc.world.getBlockState(pos.add(-1, 0, 0)).getBlock() == Blocks.OBSIDIAN) && (HoleFiller.mc.world.getBlockState(pos.add(0, 0, -1)).getBlock() == Blocks.BEDROCK | HoleFiller.mc.world.getBlockState(pos.add(0, 0, -1)).getBlock() == Blocks.OBSIDIAN) && HoleFiller.mc.world.getBlockState(pos.add(0, 0, 0)).getMaterial() == Material.AIR && HoleFiller.mc.world.getBlockState(pos.add(0, 1, 0)).getMaterial() == Material.AIR && HoleFiller.mc.world.getBlockState(pos.add(0, 2, 0)).getMaterial() == Material.AIR;
@@ -111,7 +111,7 @@ public class HoleFiller extends Module {
                 return;
             }
         }
-        if (this.blocksThisTick < this.blocksPerTick.getValue()) {
+        if (this.blocksThisTick < this.blocksPerTick.getValue(true)) {
             final int obbySlot = InventoryUtil.findHotbarBlock(BlockObsidian.class);
             final int eChestSot = InventoryUtil.findHotbarBlock(BlockEnderChest.class);
             if (obbySlot == -1 && eChestSot == -1) {
@@ -140,6 +140,6 @@ public class HoleFiller extends Module {
             this.retries.clear();
             this.retryTimer.reset();
         }
-        return !this.timer.passedMs(this.delay.getValue());
+        return !this.timer.passedMs(this.delay.getValue(true));
     }
 }

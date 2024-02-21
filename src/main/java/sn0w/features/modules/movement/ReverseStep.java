@@ -34,7 +34,7 @@ public class ReverseStep extends Module {
         if (mc.player.isInLava() || mc.player.isInWater()) return 0;
         if (touchingState.getBlock() == Blocks.BEDROCK || touchingState.getBlock() == Blocks.OBSIDIAN) {
             if (mc.player.onGround) mc.player.motionY -= 1.0;
-        } else if ((this.twoBlocks.getValue().booleanValue() && touchingState2.getBlock() == Blocks.BEDROCK || this.twoBlocks.getValue().booleanValue() && touchingState2.getBlock() == Blocks.OBSIDIAN) && ReverseStep.mc.player.onGround) {
+        } else if ((this.twoBlocks.getValue(true).booleanValue() && touchingState2.getBlock() == Blocks.BEDROCK || this.twoBlocks.getValue(true).booleanValue() && touchingState2.getBlock() == Blocks.OBSIDIAN) && ReverseStep.mc.player.onGround) {
             mc.player.motionY -= 1.0;
         }
         return 0;

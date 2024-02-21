@@ -66,7 +66,7 @@ public class AutoMinecart
         int flintSlot = InventoryUtil.getItemHotbar(Items.FLINT_AND_STEEL);
         int railSlot = InventoryUtil.findHotbarBlock(Blocks.ACTIVATOR_RAIL);
         int picSlot = InventoryUtil.getItemHotbar(Items.DIAMOND_PICKAXE);
-        if (tntSlot == -1 || railSlot == -1 || flintSlot == -1 || picSlot == -1 || this.web.getValue().booleanValue() && webSlot == -1) {
+        if (tntSlot == -1 || railSlot == -1 || flintSlot == -1 || picSlot == -1 || this.web.getValue(true).booleanValue() && webSlot == -1) {
             Command.sendMessage("<" + this.getDisplayName() + "> " + ChatFormatting.RED + "No (tnt minecart/activator rail/flint/pic/webs) in hotbar disabling...");
             this.toggle();
         }
@@ -79,24 +79,24 @@ public class AutoMinecart
             this.check = true;
             if (AutoMinecart.mc.world.getBlockState(pos).getBlock() != Blocks.ACTIVATOR_RAIL && !AutoMinecart.mc.world.getEntitiesWithinAABB(EntityMinecartTNT.class, new AxisAlignedBB(pos)).isEmpty()) {
                 InventoryUtil.switchToHotbarSlot(flintSlot, false);
-                BlockUtil.rightClickBlock(pos.down(), hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue());
+                BlockUtil.rightClickBlock(pos.down(), hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue(true));
             }
             if (AutoMinecart.mc.world.getBlockState(pos).getBlock() != Blocks.ACTIVATOR_RAIL && AutoMinecart.mc.world.getEntitiesWithinAABB(EntityMinecartTNT.class, new AxisAlignedBB(pos)).isEmpty() && AutoMinecart.mc.world.getEntitiesWithinAABB(EntityMinecartTNT.class, new AxisAlignedBB(pos.up())).isEmpty() && AutoMinecart.mc.world.getEntitiesWithinAABB(EntityMinecartTNT.class, new AxisAlignedBB(pos.down())).isEmpty()) {
                 InventoryUtil.switchToHotbarSlot(railSlot, false);
-                BlockUtil.rightClickBlock(pos.down(), hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue());
+                BlockUtil.rightClickBlock(pos.down(), hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue(true));
                 this.wait = 0;
             }
-            if (this.web.getValue().booleanValue() && this.wait != 0 && AutoMinecart.mc.world.getBlockState(pos).getBlock() == Blocks.ACTIVATOR_RAIL && !target.isInWeb && (BlockUtil.isPositionPlaceable(pos.up(), false) == 1 || BlockUtil.isPositionPlaceable(pos.up(), false) == 3) && AutoMinecart.mc.world.getEntitiesWithinAABB(EntityMinecartTNT.class, new AxisAlignedBB(pos.up())).isEmpty()) {
+            if (this.web.getValue(true).booleanValue() && this.wait != 0 && AutoMinecart.mc.world.getBlockState(pos).getBlock() == Blocks.ACTIVATOR_RAIL && !target.isInWeb && (BlockUtil.isPositionPlaceable(pos.up(), false) == 1 || BlockUtil.isPositionPlaceable(pos.up(), false) == 3) && AutoMinecart.mc.world.getEntitiesWithinAABB(EntityMinecartTNT.class, new AxisAlignedBB(pos.up())).isEmpty()) {
                 InventoryUtil.switchToHotbarSlot(webSlot, false);
-                BlockUtil.placeBlock(pos.up(), EnumHand.MAIN_HAND, this.rotate.getValue(), this.packet.getValue(), false);
+                BlockUtil.placeBlock(pos.up(), EnumHand.MAIN_HAND, this.rotate.getValue(true), this.packet.getValue(true), false);
             }
             if (AutoMinecart.mc.world.getBlockState(pos).getBlock() == Blocks.ACTIVATOR_RAIL) {
                 InventoryUtil.switchToHotbarSlot(tntSlot, false);
-                for (int u = 0; u < this.blocksPerTick.getValue(); ++u) {
-                    BlockUtil.rightClickBlock(pos, hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue());
+                for (int u = 0; u < this.blocksPerTick.getValue(true); ++u) {
+                    BlockUtil.rightClickBlock(pos, hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue(true));
                 }
             }
-            if (this.wait < this.delay.getValue()) {
+            if (this.wait < this.delay.getValue(true)) {
                 ++this.wait;
                 return i;
             }
@@ -108,7 +108,7 @@ public class AutoMinecart
             }
             InventoryUtil.switchToHotbarSlot(flintSlot, false);
             if (AutoMinecart.mc.world.getBlockState(pos).getBlock().getBlockState().getBaseState().getMaterial() != Material.FIRE && !AutoMinecart.mc.world.getEntitiesWithinAABB(EntityMinecartTNT.class, new AxisAlignedBB(pos)).isEmpty()) {
-                BlockUtil.rightClickBlock(pos.down(), hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue());
+                BlockUtil.rightClickBlock(pos.down(), hitVec, EnumHand.MAIN_HAND, EnumFacing.UP, this.packet.getValue(true));
             }
         }
         return i;
@@ -131,7 +131,7 @@ public class AutoMinecart
         EntityPlayer target = null;
         double distance = Math.pow(6.0, 2.0) + 1.0;
         for (EntityPlayer player : AutoMinecart.mc.world.playerEntities) {
-            if (EntityUtil.isntValid(player, 6.0) || player.isInWater() || player.isInLava() || !EntityUtil.isTrapped(player, false, false, false, false, false) || player.getHealth() + player.getAbsorptionAmount() > this.minHP.getValue().floatValue())
+            if (EntityUtil.isntValid(player, 6.0) || player.isInWater() || player.isInLava() || !EntityUtil.isTrapped(player, false, false, false, false, false) || player.getHealth() + player.getAbsorptionAmount() > this.minHP.getValue(true).floatValue())
                 continue;
             if (target == null) {
                 target = player;

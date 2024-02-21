@@ -42,33 +42,33 @@ public abstract class MixinItemRenderer {
             this.injection = false;
             if (hand == EnumHand.MAIN_HAND) {
                 if (offset.isOn()) {
-                    xOffset = offset.mainX.getValue().floatValue();
-                    yOffset = offset.mainY.getValue().floatValue();
+                    xOffset = offset.mainX.getValue(true).floatValue();
+                    yOffset = offset.mainY.getValue(true).floatValue();
                 }
             } else if (offset.isOn()) {
-                xOffset = offset.offX.getValue().floatValue();
-                yOffset = offset.offY.getValue().floatValue();
+                xOffset = offset.offX.getValue(true).floatValue();
+                yOffset = offset.offY.getValue(true).floatValue();
             }
             if (HandChams.getINSTANCE().isOn() && hand == EnumHand.MAIN_HAND && stack.isEmpty()) {
-                if (HandChams.getINSTANCE().mode.getValue().equals(HandChams.RenderMode.WIREFRAME)) {
+                if (HandChams.getINSTANCE().mode.getValue(true).equals(HandChams.RenderMode.WIREFRAME)) {
                     this.renderItemInFirstPerson(player, p_187457_2_, p_187457_3_, hand, p_187457_5_ + xOffset, stack, p_187457_7_ + yOffset);
                 }
                 GlStateManager.pushMatrix();
-                if (HandChams.getINSTANCE().mode.getValue().equals(HandChams.RenderMode.WIREFRAME)) {
+                if (HandChams.getINSTANCE().mode.getValue(true).equals(HandChams.RenderMode.WIREFRAME)) {
                     GL11.glPushAttrib(1048575);
                 } else {
                     GlStateManager.pushAttrib();
                 }
-                if (HandChams.getINSTANCE().mode.getValue().equals(HandChams.RenderMode.WIREFRAME)) {
+                if (HandChams.getINSTANCE().mode.getValue(true).equals(HandChams.RenderMode.WIREFRAME)) {
                     GL11.glPolygonMode(1032, 6913);
                 }
                 GL11.glDisable(3553);
                 GL11.glDisable(2896);
-                if (HandChams.getINSTANCE().mode.getValue().equals(HandChams.RenderMode.WIREFRAME)) {
+                if (HandChams.getINSTANCE().mode.getValue(true).equals(HandChams.RenderMode.WIREFRAME)) {
                     GL11.glEnable(2848);
                     GL11.glEnable(3042);
                 }
-                GL11.glColor4f(ClickGui.getInstance().rainbow.getValue() != false ? (float) ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue()).getRed() / 255.0f : (float) HandChams.getINSTANCE().red.getValue().intValue() / 255.0f, ClickGui.getInstance().rainbow.getValue() != false ? (float) ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue()).getGreen() / 255.0f : (float) HandChams.getINSTANCE().green.getValue().intValue() / 255.0f, ClickGui.getInstance().rainbow.getValue() != false ? (float) ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue()).getBlue() / 255.0f : (float) HandChams.getINSTANCE().blue.getValue().intValue() / 255.0f, (float) HandChams.getINSTANCE().alpha.getValue().intValue() / 255.0f);
+                GL11.glColor4f(ClickGui.getInstance().rainbow.getValue(true) != false ? (float) ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue(true)).getRed() / 255.0f : (float) HandChams.getINSTANCE().red.getValue(true).intValue() / 255.0f, ClickGui.getInstance().rainbow.getValue(true) != false ? (float) ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue(true)).getGreen() / 255.0f : (float) HandChams.getINSTANCE().green.getValue(true).intValue() / 255.0f, ClickGui.getInstance().rainbow.getValue(true) != false ? (float) ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue(true)).getBlue() / 255.0f : (float) HandChams.getINSTANCE().blue.getValue(true).intValue() / 255.0f, (float) HandChams.getINSTANCE().alpha.getValue(true).intValue() / 255.0f);
                 this.renderItemInFirstPerson(player, p_187457_2_, p_187457_3_, hand, p_187457_5_ + xOffset, stack, p_187457_7_ + yOffset);
                 GlStateManager.popAttrib();
                 GlStateManager.popMatrix();
