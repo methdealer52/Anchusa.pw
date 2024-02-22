@@ -11,6 +11,7 @@ import sn0w.features.Feature;
 import sn0w.features.gui.OyVeyGui;
 import sn0w.features.modules.Module;
 import sn0w.features.modules.client.ClickGui;
+import sn0w.features.modules.client.Colors;
 import sn0w.features.modules.client.FontMod;
 import sn0w.features.modules.client.HUD;
 import sn0w.features.modules.combat.Burrow;
@@ -19,6 +20,7 @@ import sn0w.features.modules.movement.NoAcceleration;
 import sn0w.features.modules.player.ChestSwap;
 import sn0w.features.modules.player.PigSpammer;
 import sn0w.features.modules.player.SilentXP;
+import sn0w.features.modules.render.BurrowESP;
 import sn0w.features.modules.render.CrystalModifier;
 import sn0w.features.modules.render.HoleESP;
 import sn0w.features.modules.render.KillEffects;
@@ -40,6 +42,7 @@ public class ModuleManager
     public void init() {
         this.modules.add(new ClickGui());
         this.modules.add(new FontMod());
+        this.modules.add(new Colors());
         this.modules.add(new HUD());
         this.modules.add(new KillEffects());
         this.modules.add(new Clip());
@@ -50,6 +53,7 @@ public class ModuleManager
         this.modules.add(new NoAcceleration());
         this.modules.add(new Burrow());
         this.modules.add(new HoleESP());
+        this.modules.add(new BurrowESP());
     }
 
     public Module getModuleByName(String name) {

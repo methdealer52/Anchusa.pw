@@ -1,9 +1,7 @@
-//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\jedav\Documents\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
-
-//Decompiled by Procyon!
-
 package sn0w.util;
 
+import sn0w.OyVey;
+import sn0w.features.gui.font.CustomFont;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -31,7 +29,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Disk;
 import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Sphere;
-import sn0w.OyVey;
 
 import java.awt.*;
 import java.nio.FloatBuffer;
@@ -41,7 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-public class RenderUtil implements Util
+public class RenderUtill implements Util
 {
     public static RenderItem itemRender;
     public static ICamera camera;
@@ -55,11 +52,13 @@ public class RenderUtil implements Util
     private static final IntBuffer viewport;
     private static final FloatBuffer modelView;
     private static final FloatBuffer projection;
+    private CustomFont customFont = new CustomFont(new Font("Arial", 3, 23), true, false);
+
 
     public static void updateModelViewProjectionMatrix() {
-        GL11.glGetFloat(2982, RenderUtil.modelView);
-        GL11.glGetFloat(2983, RenderUtil.projection);
-        GL11.glGetInteger(2978, RenderUtil.viewport);
+        GL11.glGetFloat(2982, RenderUtill.modelView);
+        GL11.glGetFloat(2983, RenderUtill.projection);
+        GL11.glGetInteger(2978, RenderUtill.viewport);
         final ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
     }
 
@@ -69,7 +68,7 @@ public class RenderUtil implements Util
     }
 
     public static AxisAlignedBB interpolateAxis(final AxisAlignedBB bb) {
-        return new AxisAlignedBB(bb.minX - RenderUtil.mc.getRenderManager().viewerPosX, bb.minY - RenderUtil.mc.getRenderManager().viewerPosY, bb.minZ - RenderUtil.mc.getRenderManager().viewerPosZ, bb.maxX - RenderUtil.mc.getRenderManager().viewerPosX, bb.maxY - RenderUtil.mc.getRenderManager().viewerPosY, bb.maxZ - RenderUtil.mc.getRenderManager().viewerPosZ);
+        return new AxisAlignedBB(bb.minX - RenderUtill.mc.getRenderManager().viewerPosX, bb.minY - RenderUtill.mc.getRenderManager().viewerPosY, bb.minZ - RenderUtill.mc.getRenderManager().viewerPosZ, bb.maxX - RenderUtill.mc.getRenderManager().viewerPosX, bb.maxY - RenderUtill.mc.getRenderManager().viewerPosY, bb.maxZ - RenderUtill.mc.getRenderManager().viewerPosZ);
     }
 
     public static void drawTexturedRect(final int x, final int y, final int textureX, final int textureY, final int width, final int height, final int zLevel) {
@@ -113,9 +112,9 @@ public class RenderUtil implements Util
     public static void drawGradientPlane(final BlockPos pos, final EnumFacing face, final Color startColor, final Color endColor, final boolean half, final boolean top) {
         final Tessellator tessellator = Tessellator.getInstance();
         final BufferBuilder builder = tessellator.getBuffer();
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, RenderUtil.mc.getRenderPartialTicks());
-        final AxisAlignedBB bb = iblockstate.getSelectedBoundingBox((World)RenderUtil.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z);
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtill.mc.player, RenderUtill.mc.getRenderPartialTicks());
+        final AxisAlignedBB bb = iblockstate.getSelectedBoundingBox((World)RenderUtill.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z);
         final float red = startColor.getRed() / 255.0f;
         final float green = startColor.getGreen() / 255.0f;
         final float blue = startColor.getBlue() / 255.0f;
@@ -293,9 +292,9 @@ public class RenderUtil implements Util
     public static void drawGradientPlane(final BlockPos pos, final EnumFacing face, final Color startColor, final Color endColor, final double height) {
         final Tessellator tessellator = Tessellator.getInstance();
         final BufferBuilder builder = tessellator.getBuffer();
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, RenderUtil.mc.getRenderPartialTicks());
-        final AxisAlignedBB bb = iblockstate.getSelectedBoundingBox((World)RenderUtil.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z).expand(0.0, height, 0.0);
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtill.mc.player, RenderUtill.mc.getRenderPartialTicks());
+        final AxisAlignedBB bb = iblockstate.getSelectedBoundingBox((World)RenderUtill.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z).expand(0.0, height, 0.0);
         final float red = startColor.getRed() / 255.0f;
         final float green = startColor.getGreen() / 255.0f;
         final float blue = startColor.getBlue() / 255.0f;
@@ -499,15 +498,15 @@ public class RenderUtil implements Util
     }
 
     public static void drawGradientBlockOutline(final BlockPos pos, final Color startColor, final Color endColor, final float linewidth, final double height) {
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, RenderUtil.mc.getRenderPartialTicks());
-        drawGradientBlockOutline(iblockstate.getSelectedBoundingBox((World)RenderUtil.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z).expand(0.0, height, 0.0), startColor, endColor, linewidth);
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtill.mc.player, RenderUtill.mc.getRenderPartialTicks());
+        drawGradientBlockOutline(iblockstate.getSelectedBoundingBox((World)RenderUtill.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z).expand(0.0, height, 0.0), startColor, endColor, linewidth);
     }
 
     public static void drawProperGradientBlockOutline(final BlockPos pos, final Color startColor, final Color midColor, final Color endColor, final float linewidth) {
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, RenderUtil.mc.getRenderPartialTicks());
-        drawProperGradientBlockOutline(iblockstate.getSelectedBoundingBox((World)RenderUtil.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), startColor, midColor, endColor, linewidth);
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtill.mc.player, RenderUtill.mc.getRenderPartialTicks());
+        drawProperGradientBlockOutline(iblockstate.getSelectedBoundingBox((World)RenderUtill.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), startColor, midColor, endColor, linewidth);
     }
 
     public static void drawProperGradientBlockOutline(final AxisAlignedBB bb, final Color startColor, final Color midColor, final Color endColor, final float linewidth) {
@@ -636,9 +635,9 @@ public class RenderUtil implements Util
     }
 
     public static void drawGradientFilledBox(final BlockPos pos, final Color startColor, final Color endColor) {
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, RenderUtil.mc.getRenderPartialTicks());
-        drawGradientFilledBox(iblockstate.getSelectedBoundingBox((World)RenderUtil.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), startColor, endColor);
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtill.mc.player, RenderUtill.mc.getRenderPartialTicks());
+        drawGradientFilledBox(iblockstate.getSelectedBoundingBox((World)RenderUtill.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), startColor, endColor);
     }
 
     public static void drawGradientFilledBox(final AxisAlignedBB bb, final Color startColor, final Color endColor) {
@@ -751,7 +750,7 @@ public class RenderUtil implements Util
     }
 
     public static void glScissor(final float x, final float y, final float x1, final float y1, final ScaledResolution sr) {
-        GL11.glScissor((int)(x * sr.getScaleFactor()), (int)(RenderUtil.mc.displayHeight - y1 * sr.getScaleFactor()), (int)((x1 - x) * sr.getScaleFactor()), (int)((y1 - y) * sr.getScaleFactor()));
+        GL11.glScissor((int)(x * sr.getScaleFactor()), (int)(RenderUtill.mc.displayHeight - y1 * sr.getScaleFactor()), (int)((x1 - x) * sr.getScaleFactor()), (int)((y1 - y) * sr.getScaleFactor()));
     }
 
     public static void drawLine(final float x, final float y, final float x1, final float y1, final float thickness, final int hex) {
@@ -783,9 +782,9 @@ public class RenderUtil implements Util
     }
 
     public static void drawBox(final BlockPos pos, final Color color) {
-        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
-        RenderUtil.camera.setPosition(Objects.requireNonNull(RenderUtil.mc.getRenderViewEntity()).posX, RenderUtil.mc.getRenderViewEntity().posY, RenderUtil.mc.getRenderViewEntity().posZ);
-        if (RenderUtil.camera.isBoundingBoxInFrustum(new AxisAlignedBB(bb.minX + RenderUtil.mc.getRenderManager().viewerPosX, bb.minY + RenderUtil.mc.getRenderManager().viewerPosY, bb.minZ + RenderUtil.mc.getRenderManager().viewerPosZ, bb.maxX + RenderUtil.mc.getRenderManager().viewerPosX, bb.maxY + RenderUtil.mc.getRenderManager().viewerPosY, bb.maxZ + RenderUtil.mc.getRenderManager().viewerPosZ))) {
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
+        RenderUtill.camera.setPosition(Objects.requireNonNull(RenderUtill.mc.getRenderViewEntity()).posX, RenderUtill.mc.getRenderViewEntity().posY, RenderUtill.mc.getRenderViewEntity().posZ);
+        if (RenderUtill.camera.isBoundingBoxInFrustum(new AxisAlignedBB(bb.minX + RenderUtill.mc.getRenderManager().viewerPosX, bb.minY + RenderUtill.mc.getRenderManager().viewerPosY, bb.minZ + RenderUtill.mc.getRenderManager().viewerPosZ, bb.maxX + RenderUtill.mc.getRenderManager().viewerPosX, bb.maxY + RenderUtill.mc.getRenderManager().viewerPosY, bb.maxZ + RenderUtill.mc.getRenderManager().viewerPosZ))) {
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
             GlStateManager.disableDepth();
@@ -813,7 +812,7 @@ public class RenderUtil implements Util
         final float green2 = endColor.getGreen() / 255.0f;
         final float blue2 = endColor.getBlue() / 255.0f;
         final float alpha2 = endColor.getAlpha() / 255.0f;
-        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
         final double offset = (bb.maxY - bb.minY) / 2.0;
         final Tessellator tessellator = Tessellator.getInstance();
         final BufferBuilder builder = tessellator.getBuffer();
@@ -871,7 +870,7 @@ public class RenderUtil implements Util
         final float green3 = midColor.getGreen() / 255.0f;
         final float blue3 = midColor.getBlue() / 255.0f;
         final float alpha3 = midColor.getAlpha() / 255.0f;
-        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
         final double offset = (bb.maxY - bb.minY) / 2.0;
         final Tessellator tessellator = Tessellator.getInstance();
         final BufferBuilder builder = tessellator.getBuffer();
@@ -926,7 +925,7 @@ public class RenderUtil implements Util
         final float green3 = midColor.getGreen() / 255.0f;
         final float blue3 = midColor.getBlue() / 255.0f;
         final float alpha3 = midColor.getAlpha() / 255.0f;
-        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
         final double offset = (bb.maxY - bb.minY) / 2.0;
         final Tessellator tessellator = Tessellator.getInstance();
         final BufferBuilder builder = tessellator.getBuffer();
@@ -984,9 +983,9 @@ public class RenderUtil implements Util
             drawOpenGradientBox(pos, invert ? endColor : color, invert ? color : endColor, height);
             return;
         }
-        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY + height, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
-        RenderUtil.camera.setPosition(Objects.requireNonNull(RenderUtil.mc.getRenderViewEntity()).posX, RenderUtil.mc.getRenderViewEntity().posY, RenderUtil.mc.getRenderViewEntity().posZ);
-        if (RenderUtil.camera.isBoundingBoxInFrustum(new AxisAlignedBB(bb.minX + RenderUtil.mc.getRenderManager().viewerPosX, bb.minY + RenderUtil.mc.getRenderManager().viewerPosY, bb.minZ + RenderUtil.mc.getRenderManager().viewerPosZ, bb.maxX + RenderUtil.mc.getRenderManager().viewerPosX, bb.maxY + RenderUtil.mc.getRenderManager().viewerPosY, bb.maxZ + RenderUtil.mc.getRenderManager().viewerPosZ))) {
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY + height, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
+        RenderUtill.camera.setPosition(Objects.requireNonNull(RenderUtill.mc.getRenderViewEntity()).posX, RenderUtill.mc.getRenderViewEntity().posY, RenderUtill.mc.getRenderViewEntity().posZ);
+        if (RenderUtill.camera.isBoundingBoxInFrustum(new AxisAlignedBB(bb.minX + RenderUtill.mc.getRenderManager().viewerPosX, bb.minY + RenderUtill.mc.getRenderManager().viewerPosY, bb.minZ + RenderUtill.mc.getRenderManager().viewerPosZ, bb.maxX + RenderUtill.mc.getRenderManager().viewerPosX, bb.maxY + RenderUtill.mc.getRenderManager().viewerPosY, bb.maxZ + RenderUtill.mc.getRenderManager().viewerPosZ))) {
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
             GlStateManager.disableDepth();
@@ -1006,10 +1005,10 @@ public class RenderUtil implements Util
     }
 
     public static void drawBlockOutline(final BlockPos pos, final Color color, final float linewidth, final boolean air) {
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        if ((air || iblockstate.getMaterial() != Material.AIR) && RenderUtil.mc.world.getWorldBorder().contains(pos)) {
-            final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, RenderUtil.mc.getRenderPartialTicks());
-            drawBlockOutline(iblockstate.getSelectedBoundingBox((World)RenderUtil.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), color, linewidth);
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        if ((air || iblockstate.getMaterial() != Material.AIR) && RenderUtill.mc.world.getWorldBorder().contains(pos)) {
+            final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtill.mc.player, RenderUtill.mc.getRenderPartialTicks());
+            drawBlockOutline(iblockstate.getSelectedBoundingBox((World)RenderUtill.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), color, linewidth);
         }
     }
 
@@ -1019,9 +1018,9 @@ public class RenderUtil implements Util
             drawGradientBlockOutline(pos, invert ? endColor : color, invert ? color : endColor, linewidth, height);
             return;
         }
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        if ((air || iblockstate.getMaterial() != Material.AIR) && RenderUtil.mc.world.getWorldBorder().contains(pos)) {
-            final AxisAlignedBB blockAxis = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY + height, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        if ((air || iblockstate.getMaterial() != Material.AIR) && RenderUtill.mc.world.getWorldBorder().contains(pos)) {
+            final AxisAlignedBB blockAxis = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY + height, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
             drawBlockOutline(blockAxis.grow(0.0020000000949949026), color, linewidth);
         }
     }
@@ -1069,9 +1068,9 @@ public class RenderUtil implements Util
     }
 
     public static void drawBoxESP(final BlockPos pos, final Color color, final float lineWidth, final boolean outline, final boolean box, final int boxAlpha) {
-        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
-        RenderUtil.camera.setPosition(Objects.requireNonNull(RenderUtil.mc.getRenderViewEntity()).posX, RenderUtil.mc.getRenderViewEntity().posY, RenderUtil.mc.getRenderViewEntity().posZ);
-        if (RenderUtil.camera.isBoundingBoxInFrustum(new AxisAlignedBB(bb.minX + RenderUtil.mc.getRenderManager().viewerPosX, bb.minY + RenderUtil.mc.getRenderManager().viewerPosY, bb.minZ + RenderUtil.mc.getRenderManager().viewerPosZ, bb.maxX + RenderUtil.mc.getRenderManager().viewerPosX, bb.maxY + RenderUtil.mc.getRenderManager().viewerPosY, bb.maxZ + RenderUtil.mc.getRenderManager().viewerPosZ))) {
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
+        RenderUtill.camera.setPosition(Objects.requireNonNull(RenderUtill.mc.getRenderViewEntity()).posX, RenderUtill.mc.getRenderViewEntity().posY, RenderUtill.mc.getRenderViewEntity().posZ);
+        if (RenderUtill.camera.isBoundingBoxInFrustum(new AxisAlignedBB(bb.minX + RenderUtill.mc.getRenderManager().viewerPosX, bb.minY + RenderUtill.mc.getRenderManager().viewerPosY, bb.minZ + RenderUtill.mc.getRenderManager().viewerPosZ, bb.maxX + RenderUtill.mc.getRenderManager().viewerPosX, bb.maxY + RenderUtill.mc.getRenderManager().viewerPosY, bb.maxZ + RenderUtill.mc.getRenderManager().viewerPosZ))) {
             GlStateManager.pushMatrix();
             GlStateManager.enableBlend();
             GlStateManager.disableDepth();
@@ -1081,7 +1080,7 @@ public class RenderUtil implements Util
             GL11.glEnable(2848);
             GL11.glHint(3154, 4354);
             GL11.glLineWidth(lineWidth);
-            final double dist = RenderUtil.mc.player.getDistance((double)(pos.getX() + 0.5f), (double)(pos.getY() + 0.5f), (double)(pos.getZ() + 0.5f)) * 0.75;
+            final double dist = RenderUtill.mc.player.getDistance((double)(pos.getX() + 0.5f), (double)(pos.getY() + 0.5f), (double)(pos.getZ() + 0.5f)) * 0.75;
             if (box) {
                 RenderGlobal.renderFilledBox(bb, color.getRed() / 255.0f, color.getGreen() / 255.0f, color.getBlue() / 255.0f, boxAlpha / 255.0f);
             }
@@ -1097,28 +1096,29 @@ public class RenderUtil implements Util
         }
     }
 
-    public static void drawText(final BlockPos pos, final String text) {
+    public void drawText(final BlockPos pos, final String text, final Color color) {
         if (pos == null || text == null) {
             return;
         }
         GlStateManager.pushMatrix();
-        glBillboardDistanceScaled(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, (EntityPlayer)RenderUtil.mc.player, 1.0f);
+        glBillboardDistanceScaled(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, (EntityPlayer)RenderUtill.mc.player, 1.0f);
         GlStateManager.disableDepth();
         GlStateManager.translate(-(OyVey.textManager.getStringWidth(text) / 2.0), 0.0, 0.0);
-        OyVey.textManager.drawStringWithShadow(text, 0.0f, 0.0f, -5592406);
+        this.customFont.drawString(text, 0.0f, 0.0f, ColorUtil.toRGBA(color), true);
         GlStateManager.popMatrix();
     }
 
+
     public static void drawOutlinedBlockESP(final BlockPos pos, final Color color, final float linewidth) {
-        final IBlockState iblockstate = RenderUtil.mc.world.getBlockState(pos);
-        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtil.mc.player, RenderUtil.mc.getRenderPartialTicks());
-        drawBoundingBox(iblockstate.getSelectedBoundingBox((World)RenderUtil.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), linewidth, ColorUtil.toRGBA(color));
+        final IBlockState iblockstate = RenderUtill.mc.world.getBlockState(pos);
+        final Vec3d interp = EntityUtil.interpolateEntity((Entity)RenderUtill.mc.player, RenderUtill.mc.getRenderPartialTicks());
+        drawBoundingBox(iblockstate.getSelectedBoundingBox((World)RenderUtill.mc.world, pos).grow(0.0020000000949949026).offset(-interp.x, -interp.y, -interp.z), linewidth, ColorUtil.toRGBA(color));
     }
 
     public static void blockEsp(final BlockPos blockPos, final Color c, final double length, final double length2) {
-        final double x = blockPos.getX() - RenderUtil.mc.renderManager.renderPosX;
-        final double y = blockPos.getY() - RenderUtil.mc.renderManager.renderPosY;
-        final double z = blockPos.getZ() - RenderUtil.mc.renderManager.renderPosZ;
+        final double x = blockPos.getX() - RenderUtill.mc.renderManager.renderPosX;
+        final double y = blockPos.getY() - RenderUtill.mc.renderManager.renderPosY;
+        final double z = blockPos.getZ() - RenderUtill.mc.renderManager.renderPosZ;
         GL11.glPushMatrix();
         GL11.glBlendFunc(770, 771);
         GL11.glEnable(3042);
@@ -1261,9 +1261,9 @@ public class RenderUtil implements Util
         GL11.glDisable(3553);
         GL11.glEnable(2884);
         GL11.glDisable(2929);
-        final double viewerPosX = RenderUtil.mc.getRenderManager().viewerPosX;
-        final double viewerPosY = RenderUtil.mc.getRenderManager().viewerPosY;
-        final double viewerPosZ = RenderUtil.mc.getRenderManager().viewerPosZ;
+        final double viewerPosX = RenderUtill.mc.getRenderManager().viewerPosX;
+        final double viewerPosY = RenderUtill.mc.getRenderManager().viewerPosY;
+        final double viewerPosZ = RenderUtill.mc.getRenderManager().viewerPosZ;
         GL11.glPushMatrix();
         GL11.glTranslated(-viewerPosX, -viewerPosY, -viewerPosZ);
     }
@@ -1283,7 +1283,7 @@ public class RenderUtil implements Util
     }
 
     public static AxisAlignedBB getBoundingBox(final BlockPos blockPos) {
-        return RenderUtil.mc.world.getBlockState(blockPos).getBoundingBox((IBlockAccess)RenderUtil.mc.world, blockPos).offset(blockPos);
+        return RenderUtill.mc.world.getBlockState(blockPos).getBoundingBox((IBlockAccess)RenderUtill.mc.world, blockPos).offset(blockPos);
     }
 
     public static void drawOutlinedBox(final AxisAlignedBB axisAlignedBB) {
@@ -1316,7 +1316,7 @@ public class RenderUtil implements Util
     }
 
     public static void drawFilledBoxESPN(final BlockPos pos, final Color color) {
-        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtil.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtil.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtil.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtil.mc.getRenderManager().viewerPosZ);
+        final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() - RenderUtill.mc.getRenderManager().viewerPosZ, pos.getX() + 1 - RenderUtill.mc.getRenderManager().viewerPosX, pos.getY() + 1 - RenderUtill.mc.getRenderManager().viewerPosY, pos.getZ() + 1 - RenderUtill.mc.getRenderManager().viewerPosZ);
         final int rgba = ColorUtil.toRGBA(color);
         drawFilledBox(bb, rgba);
     }
@@ -1411,11 +1411,11 @@ public class RenderUtil implements Util
 
     public static void glBillboard(final float x, final float y, final float z) {
         final float scale = 0.02666667f;
-        GlStateManager.translate(x - RenderUtil.mc.getRenderManager().renderPosX, y - RenderUtil.mc.getRenderManager().renderPosY, z - RenderUtil.mc.getRenderManager().renderPosZ);
+        GlStateManager.translate(x - RenderUtill.mc.getRenderManager().renderPosX, y - RenderUtill.mc.getRenderManager().renderPosY, z - RenderUtill.mc.getRenderManager().renderPosZ);
         GlStateManager.glNormal3f(0.0f, 1.0f, 0.0f);
-        GlStateManager.rotate(-RenderUtil.mc.player.rotationYaw, 0.0f, 1.0f, 0.0f);
-        GlStateManager.rotate(RenderUtil.mc.player.rotationPitch, (RenderUtil.mc.gameSettings.thirdPersonView == 2) ? -1.0f : 1.0f, 0.0f, 0.0f);
-        GlStateManager.scale(-0.02666667f, -0.02666667f, 0.02666667f);
+        GlStateManager.rotate(-RenderUtill.mc.player.rotationYaw, 0.0f, 1.0f, 0.0f);
+        GlStateManager.rotate(RenderUtill.mc.player.rotationPitch, (RenderUtill.mc.gameSettings.thirdPersonView == 2) ? -1.0f : 1.0f, 0.0f, 0.0f);
+        GlStateManager.scale(-scale, -scale, scale);
     }
 
     public static void glBillboardDistanceScaled(final float x, final float y, final float z, final EntityPlayer player, final float scale) {
@@ -1478,7 +1478,7 @@ public class RenderUtil implements Util
         GL11.glDisable(2929);
         GL11.glDepthMask(false);
         s.setDrawStyle(100013);
-        GL11.glTranslated(x - RenderUtil.mc.renderManager.renderPosX, y - RenderUtil.mc.renderManager.renderPosY, z - RenderUtil.mc.renderManager.renderPosZ);
+        GL11.glTranslated(x - RenderUtill.mc.renderManager.renderPosX, y - RenderUtill.mc.renderManager.renderPosY, z - RenderUtill.mc.renderManager.renderPosZ);
         s.draw(size, slices, stacks);
         GL11.glLineWidth(2.0f);
         GL11.glEnable(3553);
@@ -1487,6 +1487,7 @@ public class RenderUtil implements Util
         GL11.glDisable(3042);
         GL11.glPopMatrix();
     }
+
 
     public static void drawCompleteImage(final float posX, final float posY, final float width, final float height) {
         GL11.glPushMatrix();
@@ -1604,16 +1605,16 @@ public class RenderUtil implements Util
     }
 
     public static void GLPre(final float lineWidth) {
-        RenderUtil.depth = GL11.glIsEnabled(2896);
-        RenderUtil.texture = GL11.glIsEnabled(3042);
-        RenderUtil.clean = GL11.glIsEnabled(3553);
-        RenderUtil.bind = GL11.glIsEnabled(2929);
-        RenderUtil.override = GL11.glIsEnabled(2848);
-        GLPre(RenderUtil.depth, RenderUtil.texture, RenderUtil.clean, RenderUtil.bind, RenderUtil.override, lineWidth);
+        RenderUtill.depth = GL11.glIsEnabled(2896);
+        RenderUtill.texture = GL11.glIsEnabled(3042);
+        RenderUtill.clean = GL11.glIsEnabled(3553);
+        RenderUtill.bind = GL11.glIsEnabled(2929);
+        RenderUtill.override = GL11.glIsEnabled(2848);
+        GLPre(RenderUtill.depth, RenderUtill.texture, RenderUtill.clean, RenderUtill.bind, RenderUtill.override, lineWidth);
     }
 
     public static void GlPost() {
-        GLPost(RenderUtil.depth, RenderUtil.texture, RenderUtil.clean, RenderUtil.bind, RenderUtil.override);
+        GLPost(RenderUtill.depth, RenderUtill.texture, RenderUtill.clean, RenderUtill.bind, RenderUtill.override);
     }
 
     private static void GLPre(final boolean depth, final boolean texture, final boolean clean, final boolean bind, final boolean override, final float lineWidth) {
@@ -1749,12 +1750,12 @@ public class RenderUtil implements Util
     }
 
     public static Vec3d to2D(final double x, final double y, final double z) {
-        GL11.glGetFloat(2982, RenderUtil.modelView);
-        GL11.glGetFloat(2983, RenderUtil.projection);
-        GL11.glGetInteger(2978, RenderUtil.viewport);
-        final boolean result = GLU.gluProject((float)x, (float)y, (float)z, RenderUtil.modelView, RenderUtil.projection, RenderUtil.viewport, RenderUtil.screenCoords);
+        GL11.glGetFloat(2982, RenderUtill.modelView);
+        GL11.glGetFloat(2983, RenderUtill.projection);
+        GL11.glGetInteger(2978, RenderUtill.viewport);
+        final boolean result = GLU.gluProject((float)x, (float)y, (float)z, RenderUtill.modelView, RenderUtill.projection, RenderUtill.viewport, RenderUtill.screenCoords);
         if (result) {
-            return new Vec3d((double)RenderUtil.screenCoords.get(0), (double)(Display.getHeight() - RenderUtil.screenCoords.get(1)), (double)RenderUtil.screenCoords.get(2));
+            return new Vec3d((double)RenderUtill.screenCoords.get(0), (double)(Display.getHeight() - RenderUtill.screenCoords.get(1)), (double)RenderUtill.screenCoords.get(2));
         }
         return null;
     }
@@ -1813,8 +1814,8 @@ public class RenderUtil implements Util
 
     public static boolean isInViewFrustrum(final AxisAlignedBB bb) {
         final Entity current = Minecraft.getMinecraft().getRenderViewEntity();
-        RenderUtil.frustrum.setPosition(current.posX, current.posY, current.posZ);
-        return RenderUtil.frustrum.isBoundingBoxInFrustum(bb);
+        RenderUtill.frustrum.setPosition(current.posX, current.posY, current.posZ);
+        return RenderUtill.frustrum.isBoundingBoxInFrustum(bb);
     }
 
     public static void drawRoundedRectangle(final float x, final float y, final float width, final float height, final float radius) {
@@ -1904,7 +1905,7 @@ public class RenderUtil implements Util
     }
 
     public static void checkSetupFBO() {
-        final Framebuffer fbo = RenderUtil.mc.framebuffer;
+        final Framebuffer fbo = RenderUtill.mc.framebuffer;
         if (fbo != null && fbo.depthBuffer > -1) {
             setupFBO(fbo);
             fbo.depthBuffer = -1;
@@ -1915,20 +1916,20 @@ public class RenderUtil implements Util
         EXTFramebufferObject.glDeleteRenderbuffersEXT(fbo.depthBuffer);
         final int stencilDepthBufferID = EXTFramebufferObject.glGenRenderbuffersEXT();
         EXTFramebufferObject.glBindRenderbufferEXT(36161, stencilDepthBufferID);
-        EXTFramebufferObject.glRenderbufferStorageEXT(36161, 34041, RenderUtil.mc.displayWidth, RenderUtil.mc.displayHeight);
+        EXTFramebufferObject.glRenderbufferStorageEXT(36161, 34041, RenderUtill.mc.displayWidth, RenderUtill.mc.displayHeight);
         EXTFramebufferObject.glFramebufferRenderbufferEXT(36160, 36128, 36161, stencilDepthBufferID);
         EXTFramebufferObject.glFramebufferRenderbufferEXT(36160, 36096, 36161, stencilDepthBufferID);
     }
 
     static {
-        RenderUtil.itemRender = RenderUtil.mc.getRenderItem();
-        RenderUtil.camera = (ICamera)new Frustum();
+        RenderUtill.itemRender = RenderUtill.mc.getRenderItem();
+        RenderUtill.camera = (ICamera)new Frustum();
         frustrum = new Frustum();
-        RenderUtil.depth = GL11.glIsEnabled(2896);
-        RenderUtil.texture = GL11.glIsEnabled(3042);
-        RenderUtil.clean = GL11.glIsEnabled(3553);
-        RenderUtil.bind = GL11.glIsEnabled(2929);
-        RenderUtil.override = GL11.glIsEnabled(2848);
+        RenderUtill.depth = GL11.glIsEnabled(2896);
+        RenderUtill.texture = GL11.glIsEnabled(3042);
+        RenderUtill.clean = GL11.glIsEnabled(3553);
+        RenderUtill.bind = GL11.glIsEnabled(2929);
+        RenderUtill.override = GL11.glIsEnabled(2848);
         screenCoords = BufferUtils.createFloatBuffer(3);
         viewport = BufferUtils.createIntBuffer(16);
         modelView = BufferUtils.createFloatBuffer(16);
