@@ -20,6 +20,7 @@ import sn0w.features.modules.player.ChestSwap;
 import sn0w.features.modules.player.PigSpammer;
 import sn0w.features.modules.player.SilentXP;
 import sn0w.features.modules.render.CrystalModifier;
+import sn0w.features.modules.render.HoleESP;
 import sn0w.features.modules.render.KillEffects;
 import sn0w.util.Util;
 
@@ -48,6 +49,7 @@ public class ModuleManager
         this.modules.add(new CrystalModifier());
         this.modules.add(new NoAcceleration());
         this.modules.add(new Burrow());
+        this.modules.add(new HoleESP());
     }
 
     public Module getModuleByName(String name) {
