@@ -936,6 +936,9 @@ public class RenderUtil
     public static void drawBlockOutline(BlockPos pos, Color color, float lineWidth, boolean air, double lineHeight, boolean gradientOutline, boolean invertGradientOutline, int gradientAlpha, boolean b) {
     }
 
+    public static void drawBoxESP(BlockPos pos, Color color, Boolean value, Color color1, Float value1, Boolean value2, Boolean value3, Integer value4, boolean b, Double value5, Boolean value6, Boolean value7, Boolean value8, Boolean value9, int currentAlpha) {
+    }
+
     public static final class GeometryMasks {
         public static final HashMap FACEMAP = new HashMap();
 
