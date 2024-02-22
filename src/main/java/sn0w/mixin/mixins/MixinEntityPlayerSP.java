@@ -16,8 +16,6 @@ import sn0w.features.modules.movement.NoAcceleration;
 
 @Mixin(value = { EntityPlayerSP.class }, priority = 9998)
 public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
-    private final NoAcceleration noAcceleration = new NoAcceleration();
-
     public MixinEntityPlayerSP(final Minecraft p_i47378_1_, final World p_i47378_2_, final NetHandlerPlayClient p_i47378_3_, final StatisticsManager p_i47378_4_, final RecipeBook p_i47378_5_) {
         super(p_i47378_2_, p_i47378_3_.getGameProfile());
     }
@@ -47,11 +45,5 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
         if (!event.isCanceled()) {
             super.move(event.getType(), event.getX(), event.getY(), event.getZ());
         }
-    }
-
-    // Call the onUpdate method of NoAcceleration
-    @Inject(method = { "onUpdate" }, at = { @At("HEAD") })
-    private void onUpdate(final CallbackInfo info) {
-        noAcceleration.onUpdate();
     }
 }

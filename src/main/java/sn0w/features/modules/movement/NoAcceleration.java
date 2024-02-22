@@ -10,16 +10,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.Objects;
 
 public class NoAcceleration extends Module {
-    private Mode currentMode = Mode.Normal;
     public Setting<Mode> modeSetting = this.register(new Setting<>("Mode", Mode.Max));
-
+    
     public NoAcceleration() {
         super("NoAcceleration", "Disables player acceleration", Category.MOVEMENT, true, false, false);
     }
 
     @SubscribeEvent
     public void onMove(MoveEvent event) {
-        double[] speed = EntityUtil.forward(getSpeed(currentMode));
+        double[] speed = EntityUtil.forward(getSpeed(modeSetting.getValue(true)));
         event.setX(speed[0]);
         event.setZ(speed[1]);
     }
@@ -44,14 +43,8 @@ public class NoAcceleration extends Module {
     }
 
     @Override
-    public int onUpdate() {
-        this.currentMode = modeSetting.getValue(true);
-        return 0;
-    }
-
-    @Override
     public String getDisplayInfo() {
-        return currentMode.toString();
+        return modeSetting.currentEnumName();
     }
 
     public enum Mode {
