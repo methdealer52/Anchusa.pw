@@ -393,9 +393,5 @@ public class BlockUtil
     public static boolean rayTracePlaceCheck(BlockPos pos) {
         return BlockUtil.rayTracePlaceCheck(pos, true);
     }
-
-    public static boolean isUnsafe(Block block) {
-        return false;
-    }
 }
 

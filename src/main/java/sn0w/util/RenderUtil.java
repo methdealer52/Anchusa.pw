@@ -927,6 +927,7 @@ public class RenderUtil
         EXTFramebufferObject.glFramebufferRenderbufferEXT(36160, 36096, 36161, stencilDepthBufferID);
     }
 
+<<<<<<< HEAD
     public static void drawBlockWireframe(BlockPos pos, Color color, float lineWidth, boolean flatCross) {
     }
 
@@ -939,6 +940,8 @@ public class RenderUtil
     public static void drawBoxESP(BlockPos pos, Color color, Boolean value, Color color1, Float value1, Boolean value2, Boolean value3, Integer value4, boolean b, Double value5, Boolean value6, Boolean value7, Boolean value8, Boolean value9, int currentAlpha) {
     }
 
+=======
+>>>>>>> parent of 606e250 (h)
     public static final class GeometryMasks {
         public static final HashMap FACEMAP = new HashMap();
 

@@ -12,10 +12,6 @@ public class RotationManager
     private float yaw;
     private float pitch;
 
-    public static boolean isInFov(BlockPos pos) {
-        return false;
-    }
-
     public void updateRotations() {
         this.yaw = RotationManager.mc.player.rotationYaw;
         this.pitch = RotationManager.mc.player.rotationPitch;

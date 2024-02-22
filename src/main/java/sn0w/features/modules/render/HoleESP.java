@@ -1,9 +1,6 @@
-//Deobfuscated with https://github.com/SimplyProgrammer/Minecraft-Deobfuscator3000 using mappings "C:\Users\jedav\Documents\Minecraft-Deobfuscator3000-master\1.12 stable mappings"!
-
-//Decompiled by Procyon!
-
 package sn0w.features.modules.render;
 
+<<<<<<< HEAD
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -101,14 +98,72 @@ public class HoleESP extends Module
             HoleESP.INSTANCE = new HoleESP();
         }
         return HoleESP.INSTANCE;
+=======
+import sn0w.event.events.Render3DEvent;
+import sn0w.features.modules.Module;
+import sn0w.features.setting.Setting;
+import sn0w.util.BlockUtil;
+import sn0w.util.RenderUtil;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
+
+import java.awt.*;
+
+public class HoleESP
+        extends Module {
+    private static HoleESP INSTANCE = new HoleESP();
+    private final Setting<Integer> range = this.register(new Setting<Integer>("RangeX", 0, 0, 10));
+    private final Setting<Integer> rangeY = this.register(new Setting<Integer>("RangeY", 0, 0, 10));
+    private final Setting<Integer> red = this.register(new Setting<Integer>("Red", 0, 0, 255));
+    private final Setting<Integer> green = this.register(new Setting<Integer>("Green", 255, 0, 255));
+    private final Setting<Integer> blue = this.register(new Setting<Integer>("Blue", 0, 0, 255));
+    private final Setting<Integer> alpha = this.register(new Setting<Integer>("Alpha", 255, 0, 255));
+    private final Setting<Integer> boxAlpha = this.register(new Setting<Integer>("BoxAlpha", 125, 0, 255));
+    private final Setting<Float> lineWidth = this.register(new Setting<Float>("LineWidth", Float.valueOf(1.0f), Float.valueOf(0.1f), Float.valueOf(5.0f)));
+    private final Setting<Integer> safeRed = this.register(new Setting<Integer>("BedrockRed", 0, 0, 255));
+    private final Setting<Integer> safeGreen = this.register(new Setting<Integer>("BedrockGreen", 255, 0, 255));
+    private final Setting<Integer> safeBlue = this.register(new Setting<Integer>("BedrockBlue", 0, 0, 255));
+    private final Setting<Integer> safeAlpha = this.register(new Setting<Integer>("BedrockAlpha", 255, 0, 255));
+    public Setting<Boolean> future = this.register(new Setting<Boolean>("FutureRender", true));
+    public Setting<Boolean> fov = this.register(new Setting<Boolean>("InFov", true));
+    public Setting<Boolean> renderOwn = this.register(new Setting<Boolean>("RenderOwn", true));
+    public Setting<Boolean> box = this.register(new Setting<Boolean>("Box", true));
+    public Setting<Boolean> outline = this.register(new Setting<Boolean>("Outline", true));
+    private final Setting<Integer> cRed = this.register(new Setting<Object>("OL-Red", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+    private final Setting<Integer> cGreen = this.register(new Setting<Object>("OL-Green", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+    private final Setting<Integer> cBlue = this.register(new Setting<Object>("OL-Blue", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+    private final Setting<Integer> cAlpha = this.register(new Setting<Object>("OL-Alpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+    private final Setting<Integer> safecRed = this.register(new Setting<Object>("OL-BedrockRed", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+    private final Setting<Integer> safecGreen = this.register(new Setting<Object>("OL-BedrockGreen", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+    private final Setting<Integer> safecBlue = this.register(new Setting<Object>("OL-BedrockBlue", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+    private final Setting<Integer> safecAlpha = this.register(new Setting<Object>("OL-BedrockAlpha", Integer.valueOf(255), Integer.valueOf(0), Integer.valueOf(255), v -> this.outline.getValue(true)));
+
+    public HoleESP() {
+        super("HoleESP", "Shows safe spots.", Module.Category.RENDER, true, false, false);
+        this.setInstance();
+>>>>>>> parent of 606e250 (h)
     }
 
-    public void onRender3D(final Render3DEvent event) {
-        assert HoleESP.mc.renderViewEntity != null;
-        final Vec3i playerPos = new Vec3i(HoleESP.mc.renderViewEntity.posX, HoleESP.mc.renderViewEntity.posY, HoleESP.mc.renderViewEntity.posZ);
+    public static HoleESP getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new HoleESP();
+        }
+        return INSTANCE;
+    }
+
+    private void setInstance() {
+        INSTANCE = this;
+    }
+
+    @Override
+    public void onRender3D(Render3DEvent event) {
+        assert (HoleESP.mc.renderViewEntity != null);
+        Vec3i playerPos = new Vec3i(HoleESP.mc.renderViewEntity.posX, HoleESP.mc.renderViewEntity.posY, HoleESP.mc.renderViewEntity.posZ);
         for (int x = playerPos.getX() - this.range.getValue(true); x < playerPos.getX() + this.range.getValue(true); ++x) {
             for (int z = playerPos.getZ() - this.range.getValue(true); z < playerPos.getZ() + this.range.getValue(true); ++z) {
                 for (int y = playerPos.getY() + this.rangeY.getValue(true); y > playerPos.getY() - this.rangeY.getValue(true); --y) {
+<<<<<<< HEAD
                     final BlockPos pos = new BlockPos(x, y, z);
                     if (HoleESP.mc.world.getBlockState(pos).getBlock().equals(Blocks.AIR) && HoleESP.mc.world.getBlockState(pos.add(0, 1, 0)).getBlock().equals(Blocks.AIR) && HoleESP.mc.world.getBlockState(pos.add(0, 2, 0)).getBlock().equals(Blocks.AIR) && (!pos.equals((Object)new BlockPos(HoleESP.mc.player.posX, HoleESP.mc.player.posY, HoleESP.mc.player.posZ)) || this.renderOwn.getValue(true)) && (BlockUtil.isPosInFov(pos) || !this.fov.getValue(true))) {
                         if (HoleESP.mc.world.getBlockState(pos.north()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.east()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.west()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.south()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
@@ -117,13 +172,28 @@ public class HoleESP extends Module
                         else if (BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.down()).getBlock()) && BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.east()).getBlock()) && BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.west()).getBlock()) && BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.south()).getBlock()) && BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.north()).getBlock())) {
                             RenderUtil.drawBoxESP(pos, ((boolean)this.rainbow.getValue(true)) ? ColorUtil.rainbow(ClickGui.getInstance().rainbowHue.getValue(true)) : new Color(this.red.getValue(true), this.green.getValue(true), this.blue.getValue(true), this.alpha.getValue(true)), this.customOutline.getValue(true), new Color(this.cRed.getValue(true), this.cGreen.getValue(true), this.cBlue.getValue(true), this.cAlpha.getValue(true)), this.lineWidth.getValue(true), this.outline.getValue(true), this.box.getValue(true), this.boxAlpha.getValue(true), true, this.height.getValue(true), this.gradientBox.getValue(true), this.gradientOutline.getValue(true), this.invertGradientBox.getValue(true), this.invertGradientOutline.getValue(true), this.currentAlpha);
                         }
+=======
+                    BlockPos pos = new BlockPos(x, y, z);
+                    if (!HoleESP.mc.world.getBlockState(pos).getBlock().equals(Blocks.AIR) || !HoleESP.mc.world.getBlockState(pos.add(0, 1, 0)).getBlock().equals(Blocks.AIR) || !HoleESP.mc.world.getBlockState(pos.add(0, 2, 0)).getBlock().equals(Blocks.AIR) || pos.equals(new BlockPos(HoleESP.mc.player.posX, HoleESP.mc.player.posY, HoleESP.mc.player.posZ)) && !this.renderOwn.getValue(true).booleanValue() || !BlockUtil.isPosInFov(pos).booleanValue() && this.fov.getValue(true).booleanValue())
+                        continue;
+                    if (HoleESP.mc.world.getBlockState(pos.north()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.east()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.west()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.south()).getBlock() == Blocks.BEDROCK && HoleESP.mc.world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
+                        RenderUtil.drawBoxESP(this.future.getValue(true) != false ? pos.down() : pos, new Color(this.safeRed.getValue(true), this.safeGreen.getValue(true), this.safeBlue.getValue(true), this.safeAlpha.getValue(true)), this.outline.getValue(true), new Color(this.safecRed.getValue(true), this.safecGreen.getValue(true), this.safecBlue.getValue(true), this.safecAlpha.getValue(true)), this.lineWidth.getValue(true).floatValue(), this.outline.getValue(true), this.box.getValue(true), this.boxAlpha.getValue(true), true);
+                        continue;
+>>>>>>> parent of 606e250 (h)
                     }
+                    if (!BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.down()).getBlock()) || !BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.east()).getBlock()) || !BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.west()).getBlock()) || !BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.south()).getBlock()) || !BlockUtil.isBlockUnSafe(HoleESP.mc.world.getBlockState(pos.north()).getBlock()))
+                        continue;
+                    RenderUtil.drawBoxESP(this.future.getValue(true) != false ? pos.down() : pos, new Color(this.red.getValue(true), this.green.getValue(true), this.blue.getValue(true), this.alpha.getValue(true)), this.outline.getValue(true), new Color(this.cRed.getValue(true), this.cGreen.getValue(true), this.cBlue.getValue(true), this.cAlpha.getValue(true)), this.lineWidth.getValue(true).floatValue(), this.outline.getValue(true), this.box.getValue(true), this.boxAlpha.getValue(true), true);
                 }
             }
         }
     }
+<<<<<<< HEAD
 
     static {
         HoleESP.INSTANCE = new HoleESP();
     }
+=======
+>>>>>>> parent of 606e250 (h)
 }
+
