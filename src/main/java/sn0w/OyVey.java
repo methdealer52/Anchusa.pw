@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
+import sn0w.features.gui.font.CustomFont;
 import sn0w.manager.*;
 
 @Mod(modid = "anchusa", name = "Anchusa", version = "1.0")
@@ -36,6 +37,7 @@ public class OyVey {
     public static OyVey INSTANCE;
     public static sn0w.manager.TimerManager TimerManager;
     public static sn0w.manager.TimerManager timerManager;
+    public static CustomFont manager;
     private static boolean unloaded;
 
     static {
