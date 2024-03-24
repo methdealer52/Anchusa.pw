@@ -17,13 +17,11 @@ import sn0w.features.modules.client.HUD;
 import sn0w.features.modules.combat.Burrow;
 import sn0w.features.modules.exploit.Clip;
 import sn0w.features.modules.movement.NoAcceleration;
+import sn0w.features.modules.player.Announcer;
 import sn0w.features.modules.player.ChestSwap;
 import sn0w.features.modules.player.PigSpammer;
 import sn0w.features.modules.player.SilentXP;
-import sn0w.features.modules.render.BurrowESP;
-import sn0w.features.modules.render.CrystalModifier;
-import sn0w.features.modules.render.HoleESP;
-import sn0w.features.modules.render.KillEffects;
+import sn0w.features.modules.render.*;
 import sn0w.util.Util;
 
 import java.util.*;
@@ -54,6 +52,8 @@ public class ModuleManager
         this.modules.add(new Burrow());
         this.modules.add(new HoleESP());
         this.modules.add(new BurrowESP());
+        this.modules.add(new Announcer());
+        this.modules.add(new PopChams());
     }
 
     public Module getModuleByName(String name) {
