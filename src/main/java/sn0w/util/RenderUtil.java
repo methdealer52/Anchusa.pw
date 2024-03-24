@@ -1934,4 +1934,10 @@ public class RenderUtil implements Util
         modelView = BufferUtils.createFloatBuffer(16);
         projection = BufferUtils.createFloatBuffer(16);
     }
+
+    public static void drawCrossESP(BlockPos pos, Color color, Float value, boolean b) {
+    }
+
+    public static void drawFlucESP(BlockPos pos, Color color, Float value, boolean b) {
+    }
 }
