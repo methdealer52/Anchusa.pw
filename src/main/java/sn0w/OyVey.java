@@ -14,7 +14,7 @@ import sn0w.manager.*;
 public class OyVey {
     public static final String MODID = "anchusa";
     public static final String MODNAME = "Anchusa";
-    public static final String PREFIX = ChatFormatting.LIGHT_PURPLE + "[" +  "Anchusa" + "]";
+    public static final String PREFIX = ChatFormatting.DARK_PURPLE + "[" + ChatFormatting.LIGHT_PURPLE + "Anchusa" + ChatFormatting.DARK_PURPLE + "]";
     public static final Logger LOGGER = LogManager.getLogger("Anchusa");
     public static CommandManager commandManager;
     public static FriendManager friendManager;

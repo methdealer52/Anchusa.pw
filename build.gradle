@@ -15,12 +15,14 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+        classpath 'com.peterabeles.gversion:com.peterabeles.gversion.gradle.plugin:1.5.0'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'com.peterabeles.gversion'
 
 
 sourceCompatibility = targetCompatibility = '1.8'
@@ -59,7 +61,16 @@ dependencies {
 
 }
 
-
+gversion {
+    srcDir       = "src/main/java/"
+    classPackage = "sn0w"
+    className    = "GitInfo"
+    dateFormat   = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    timeZone     = "EST"
+    debug        = false
+    language     = "java"
+    explicitType = false
+}
 
 task getDeps(type: Copy) {
     from sourceSets.main.runtimeClasspath
