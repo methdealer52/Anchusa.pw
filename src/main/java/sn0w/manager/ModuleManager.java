@@ -16,6 +16,7 @@ import sn0w.features.modules.client.FontMod;
 import sn0w.features.modules.client.HUD;
 import sn0w.features.modules.combat.Burrow;
 import sn0w.features.modules.exploit.Clip;
+import sn0w.features.modules.misc.ChatModifier;
 import sn0w.features.modules.movement.NoAcceleration;
 import sn0w.features.modules.player.Announcer;
 import sn0w.features.modules.player.ChestSwap;
@@ -54,6 +55,8 @@ public class ModuleManager
         this.modules.add(new BurrowESP());
         this.modules.add(new Announcer());
         this.modules.add(new PopChams());
+        this.modules.add(new AspectRatio());
+        this.modules.add(new ChatModifier());
     }
 
     public Module getModuleByName(String name) {

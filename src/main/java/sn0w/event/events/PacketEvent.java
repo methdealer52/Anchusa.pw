@@ -1,36 +1,37 @@
 package sn0w.event.events;
 
-import sn0w.event.EventStage;
-import net.minecraft.network.Packet;
-import net.minecraftforge.fml.common.eventhandler.Cancelable;
+import sn0w.event.*;
+import net.minecraft.network.*;
+import net.minecraftforge.fml.common.eventhandler.*;
 
-public class PacketEvent
-        extends EventStage {
+public class PacketEvent extends EventStage
+{
     private final Packet<?> packet;
 
-    public PacketEvent(int stage, Packet<?> packet) {
+    public PacketEvent(final int stage, final Packet<?> packet) {
         super(stage);
         this.packet = packet;
     }
 
     public <T extends Packet<?>> T getPacket() {
-        return (T) this.packet;
+        return (T)this.packet;
     }
 
     @Cancelable
-    public static class Send
-            extends PacketEvent {
-        public Send(int stage, Packet<?> packet) {
+    public static class Send extends PacketEvent
+    {
+        public Send(final int stage, final Packet<?> packet) {
             super(stage, packet);
         }
     }
 
     @Cancelable
-    public static class Receive
-            extends PacketEvent {
-        public Receive(int stage, Packet<?> packet) {
+    public static class Receive extends PacketEvent
+    {
+        public Receive(final int stage, final Packet<?> packet) {
             super(stage, packet);
         }
     }
 }
+
 
