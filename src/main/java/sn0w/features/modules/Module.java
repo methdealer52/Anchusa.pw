@@ -40,6 +40,11 @@ public class Module
         this.alwaysListening = alwaysListening;
     }
 
+    public Module(String armor, Category category, String s) {
+        this.description = description;
+        this.category = category1;
+    }
+
     public boolean isSliding() {
         return this.sliding;
     }

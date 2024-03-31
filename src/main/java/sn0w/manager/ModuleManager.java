@@ -14,12 +14,12 @@ import sn0w.features.modules.client.ClickGui;
 import sn0w.features.modules.client.Colors;
 import sn0w.features.modules.client.FontMod;
 import sn0w.features.modules.client.HUD;
+import sn0w.features.modules.combat.Armor;
 import sn0w.features.modules.combat.Burrow;
 import sn0w.features.modules.exploit.Clip;
 import sn0w.features.modules.misc.ChatModifier;
 import sn0w.features.modules.movement.NoAcceleration;
 import sn0w.features.modules.player.Announcer;
-import sn0w.features.modules.player.ChestSwap;
 import sn0w.features.modules.player.PigSpammer;
 import sn0w.features.modules.player.SilentXP;
 import sn0w.features.modules.render.*;
@@ -46,7 +46,6 @@ public class ModuleManager
         this.modules.add(new KillEffects());
         this.modules.add(new Clip());
         this.modules.add(new PigSpammer());
-        this.modules.add(new ChestSwap());
         this.modules.add(new SilentXP());
         this.modules.add(new CrystalModifier());
         this.modules.add(new NoAcceleration());
@@ -57,6 +56,7 @@ public class ModuleManager
         this.modules.add(new PopChams());
         this.modules.add(new AspectRatio());
         this.modules.add(new ChatModifier());
+        this.modules.add(new Armor());
     }
 
     public Module getModuleByName(String name) {
